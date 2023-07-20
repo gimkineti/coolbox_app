@@ -26,18 +26,25 @@ public class LoginController {
     }
 	
 	@PostMapping(value="/login")
-	public ModelAndView logExitoso(Model m,
-			@RequestParam(name="nombre_usuario") String nombreUsuario,
-			@RequestParam(name = "password_usuario") String passwordUsuario) {
+	public ModelAndView logExitoso(@RequestParam(name="nombreUsuario") String nombreUsuario,
+								@RequestParam(name="passwordUsuario") String passwordUsuario) {
 		try {
-		    Usuarios usuario = usuarioDao.buscarUsuario(nombreUsuario, passwordUsuario);
-		    if (usuario == null) {
-		        return new ModelAndView(new RedirectView("login-no-exitoso"));
-		    } else {
-		        return new ModelAndView(new RedirectView("/home/dashboard"));
-		    }
+			Usuarios usuario = usuarioDao.buscarUsuario(nombreUsuario, passwordUsuario);
+			if (usuario == null) {
+				ModelAndView modelAndView = new ModelAndView("mensaje-error");
+				modelAndView.addObject("titulo", "Login no exitoso");
+				modelAndView.addObject("mensaje", "El usuario y la contraseña no coinciden");
+				modelAndView.addObject("direccion", "/login");
+				return modelAndView;
+			} else {
+				return new ModelAndView(new RedirectView("/home/dashboard"));
+			}
 		} catch (NoResultException e) {
-		    return new ModelAndView(new RedirectView("login-no-exitoso"));
+			ModelAndView modelAndView = new ModelAndView("mensaje-error");
+			modelAndView.addObject("titulo", "Login no exitoso");
+			modelAndView.addObject("mensaje", "El usuario y la contraseña no coinciden");
+			modelAndView.addObject("direccion", "/login");
+			return modelAndView;
 		}
 	}
 	
