@@ -32,8 +32,8 @@ public class LoginController {
 			Usuarios usuario = usuarioDao.buscarUsuario(nombreUsuario, passwordUsuario);
 			if (usuario == null) {
 				ModelAndView modelAndView = new ModelAndView("mensaje-error");
-				modelAndView.addObject("titulo", "Login no exitoso");
-				modelAndView.addObject("mensaje", "El usuario y la contraseña no coinciden");
+				modelAndView.addObject("titulo", "Login No Exitoso");
+				modelAndView.addObject("mensaje", "El Usuario Y La Contraseña No Coinciden");
 				modelAndView.addObject("direccion", "/login");
 				return modelAndView;
 			} else {
@@ -41,15 +41,10 @@ public class LoginController {
 			}
 		} catch (NoResultException e) {
 			ModelAndView modelAndView = new ModelAndView("mensaje-error");
-			modelAndView.addObject("titulo", "Login no exitoso");
-			modelAndView.addObject("mensaje", "El usuario y la contraseña no coinciden");
+			modelAndView.addObject("titulo", "Login No Exitoso");
+			modelAndView.addObject("mensaje", "El Usuario Y La Contraseña No Coinciden");
 			modelAndView.addObject("direccion", "/login");
 			return modelAndView;
 		}
-	}
-	
-	@GetMapping(value = "/login-no-exitoso")
-	public String logFallido(Model m) {
-		return "login-no-exitoso";
 	}
 }

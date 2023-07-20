@@ -24,7 +24,7 @@ public class UsuariosController {
             model.addAttribute("usuarios", usuarios);
             model.addAttribute("titulo", "Crud de Usuarios");
             return "listar-usuarios";
-}
+    }
 	
 	@GetMapping(value = "/usuarios/nuevo")
 	public String mostrarFormularioNuevoUsuario(Model model) {

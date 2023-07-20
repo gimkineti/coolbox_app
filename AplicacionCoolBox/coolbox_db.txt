@@ -1,0 +1,158 @@
+-- Creación de la base de datos
+CREATE DATABASE coolbox_db;
+
+-- Uso de la base de datos
+USE coolbox_db;
+
+-- Creación de la tabla roles
+CREATE TABLE roles (
+    id_rol BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre_rol VARCHAR(30) NOT NULL
+);
+
+-- Creación de la tabla usuarios
+CREATE TABLE usuarios (
+    id_usuario BIGINT AUTO_INCREMENT PRIMARY KEY,
+    rol_usuario BIGINT NOT NULL,
+    nombre_usuario VARCHAR(30) NOT NULL,
+    password_usuario VARCHAR(20) NOT NULL,
+    email_usuario VARCHAR(50) NOT NULL,
+    FOREIGN KEY (rol_usuario) REFERENCES roles (id_rol)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+-- Creación de la tabla categorias
+CREATE TABLE categorias (
+    id_categoria BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre_categoria VARCHAR(50) NOT NULL
+);
+
+-- Creación de la tabla marcas
+CREATE TABLE marcas (
+    id_marca BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre_marca VARCHAR(50) NOT NULL
+);
+
+-- Creación de la tabla productos
+CREATE TABLE productos (
+    id_producto BIGINT AUTO_INCREMENT PRIMARY KEY,
+    descripcion_producto VARCHAR(100) NOT NULL,
+    stock_producto INT UNSIGNED NOT NULL,
+    marca_producto BIGINT NOT NULL,
+    categoria_producto BIGINT NOT NULL,
+    precio_venta DECIMAL(10, 2) NOT NULL,
+    rol_producto BIGINT NOT NULL,
+    fecha_producto DATE NOT NULL,
+    FOREIGN KEY (marca_producto) REFERENCES marcas (id_marca)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (categoria_producto) REFERENCES categorias (id_categoria)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (rol_producto) REFERENCES roles (id_rol)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+-- Disparador para la tabla roles
+DELIMITER //
+CREATE TRIGGER uppercase_roles
+BEFORE INSERT ON roles
+FOR EACH ROW
+BEGIN
+    SET NEW.nombre_rol = UPPER(NEW.nombre_rol);
+END //
+DELIMITER ;
+
+-- Disparador para la tabla usuarios
+DELIMITER //
+CREATE TRIGGER uppercase_usuarios
+BEFORE INSERT ON usuarios
+FOR EACH ROW
+BEGIN
+    SET NEW.nombre_usuario = UPPER(NEW.nombre_usuario);
+    SET NEW.email_usuario = UPPER(NEW.email_usuario);
+END //
+DELIMITER ;
+
+-- Disparador para la tabla categorias
+DELIMITER //
+CREATE TRIGGER uppercase_categorias
+BEFORE INSERT ON categorias
+FOR EACH ROW
+BEGIN
+    SET NEW.nombre_categoria = UPPER(NEW.nombre_categoria);
+END //
+DELIMITER ;
+
+-- Disparador para la tabla marcas
+DELIMITER //
+CREATE TRIGGER uppercase_marcas
+BEFORE INSERT ON marcas
+FOR EACH ROW
+BEGIN
+    SET NEW.nombre_marca = UPPER(NEW.nombre_marca);
+END //
+DELIMITER ;
+
+-- Disparador para la tabla productos
+DELIMITER //
+CREATE TRIGGER uppercase_productos
+BEFORE INSERT ON productos
+FOR EACH ROW
+BEGIN
+    SET NEW.descripcion_producto = UPPER(NEW.descripcion_producto);
+END //
+DELIMITER ;
+
+-- Disparador para la tabla roles (actualizaciones)
+DELIMITER //
+CREATE TRIGGER uppercase_roles_update
+BEFORE UPDATE ON roles
+FOR EACH ROW
+BEGIN
+    SET NEW.nombre_rol = UPPER(NEW.nombre_rol);
+END //
+DELIMITER ;
+
+-- Disparador para la tabla usuarios (actualizaciones)
+DELIMITER //
+CREATE TRIGGER uppercase_usuarios_update
+BEFORE UPDATE ON usuarios
+FOR EACH ROW
+BEGIN
+    SET NEW.nombre_usuario = UPPER(NEW.nombre_usuario);
+    SET NEW.email_usuario = UPPER(NEW.email_usuario);
+END //
+DELIMITER ;
+
+-- Disparador para la tabla categorias (actualizaciones)
+DELIMITER //
+CREATE TRIGGER uppercase_categorias_update
+BEFORE UPDATE ON categorias
+FOR EACH ROW
+BEGIN
+    SET NEW.nombre_categoria = UPPER(NEW.nombre_categoria);
+END //
+DELIMITER ;
+
+-- Disparador para la tabla marcas (actualizaciones)
+DELIMITER //
+CREATE TRIGGER uppercase_marcas_update
+BEFORE UPDATE ON marcas
+FOR EACH ROW
+BEGIN
+    SET NEW.nombre_marca = UPPER(NEW.nombre_marca);
+END //
+DELIMITER ;
+
+-- Disparador para la tabla productos (actualizaciones)
+DELIMITER //
+CREATE TRIGGER uppercase_productos_update
+BEFORE UPDATE ON productos
+FOR EACH ROW
+BEGIN
+    SET NEW.descripcion_producto = UPPER(NEW.descripcion_producto);
+END //
+DELIMITER ;
