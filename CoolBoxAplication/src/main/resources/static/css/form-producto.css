@@ -1,0 +1,54 @@
+/* form-producto.css */
+
+/* Estilos para el body */
+body {
+    background-color: #f8f9fa; /* Color de fondo para el body */
+}
+
+/* Estilos para las tarjetas */
+.card {
+    border: 1px solid #ccc; /* Borde de las tarjetas */
+    border-radius: 10px; /* Esquinas redondeadas de las tarjetas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para las tarjetas */
+}
+
+/* Estilos para el header de las tarjetas */
+.card-header {
+    background-color: SteelBlue; /* Color de fondo para el header de las tarjetas */
+    color: white; /* Color del texto en el header de las tarjetas */
+    font-size: 24px; /* Tamaño de fuente del título */
+    text-align: center; /* Centrar el texto en el header de las tarjetas */
+}
+
+/* Estilos para los botones primarios */
+.btn-primary {
+    background-color: #3498db; /* Azul celeste claro */
+    border-color: #3498db; /* Borde azul celeste claro */
+}
+
+.btn-primary:hover {
+    background-color: #2980b9; /* Azul celeste oscuro */
+    border-color: #2980b9; /* Borde azul celeste oscuro */
+}
+
+/* Estilos para los botones secundarios */
+.btn-secondary {
+    background-color: #95a5a6; /* Gris claro */
+    border-color: #95a5a6; /* Borde gris claro */
+}
+
+.btn-secondary:hover {
+    background-color: #7f8c8d; /* Gris oscuro */
+    border-color: #7f8c8d; /* Borde gris oscuro */
+}
+
+/* Estilos para las etiquetas de los campos del formulario */
+.form-label {
+    font-weight: bold; /* Estilo en negrita para las etiquetas de los campos del formulario */
+}
+
+/* Estilos para los mensajes de error en el formulario */
+.invalid-feedback {
+    color: #dc3545; /* Color rojo para los mensajes de error */
+    font-size: 14px; /* Tamaño de fuente para los mensajes de error */
+}

@@ -1,0 +1,30 @@
+/* Estilos personalizados para el header de la tabla */
+.table thead th {
+    background-color: Indigo; /* Fondo azul */
+    color: #fff; /* Texto blanco */
+}
+/* Estilos personalizados para los botones */
+.btn-primary {
+    background-color: #3498db; /* Azul celeste claro */
+    border-color: #3498db; /* Borde azul celeste claro */
+}
+.btn-primary:hover {
+    background-color: #2980b9; /* Azul celeste oscuro */
+    border-color: #2980b9; /* Borde azul celeste oscuro */
+}
+.btn-danger {
+    background-color: #e74c3c; /* Rojo */
+    border-color: #e74c3c; /* Borde rojo */
+}
+.btn-danger:hover {
+    background-color: #c0392b; /* Rojo oscuro */
+    border-color: #c0392b; /* Borde rojo oscuro */
+}
+.btn-light {
+    background-color: #f1c40f; /* Amarillo */
+    border-color: #f1c40f; /* Borde amarillo */
+}
+.btn-light:hover {
+    background-color: #f39c12; /* Amarillo oscuro */
+    border-color: #f39c12; /* Borde amarillo oscuro */
+}

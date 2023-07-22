@@ -1,9 +1,12 @@
 package com.coolbox.aplicacion.controller;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +27,12 @@ import com.coolbox.aplicacion.entity.Roles;
 
 import jakarta.validation.Valid;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+
+import com.coolbox.aplicacion.service.ExcelGenerator;
+import com.coolbox.aplicacion.service.PdfGenerator;
+
 @Controller
 public class ProductosController {
 
@@ -38,6 +47,12 @@ public class ProductosController {
 	
 	@Autowired
 	private IRolesDao rolesDao;
+
+    @Autowired
+    private PdfGenerator pdfGenerator;
+
+    @Autowired
+    private ExcelGenerator excelGenerator;
 
     @GetMapping("/productos")
     public String listarProductos(Model model) {
@@ -144,4 +159,39 @@ public class ProductosController {
         productosDao.eliminarProducto(idProducto);
         return "redirect:/productos";
     }
+
+    @GetMapping("/productos/exportar-pdf")
+    public ResponseEntity<byte[]> exportarPdf() {
+        List<Productos> listaProductos = productosDao.listarProductos();
+
+        // Generar el informe PDF utilizando el PdfGenerator
+        ByteArrayInputStream pdfBytesStream = pdfGenerator.generatePdf(listaProductos);
+        byte[] pdfBytes = pdfBytesStream.readAllBytes();
+
+        // Crear el encabezado y enviar el PDF como respuesta para descarga
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "productos.pdf"); // Nombre del archivo a descargar
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/productos/exportar-excel")
+    public ResponseEntity<byte[]> exportarExcel() {
+        List<Productos> listaProductos = productosDao.listarProductos();
+
+        // Generar el informe Excel utilizando el ExcelGenerator
+        ByteArrayInputStream excelBytesStream = excelGenerator.generateExcel(listaProductos);
+        byte[] excelBytes = excelBytesStream.readAllBytes();
+
+        // Crear el encabezado y enviar el Excel como respuesta para descarga
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachment", "productos.xlsx"); // Nombre del archivo a descargar
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+
+        return new ResponseEntity<>(excelBytes, headers, HttpStatus.OK);
+    }
+
 }
