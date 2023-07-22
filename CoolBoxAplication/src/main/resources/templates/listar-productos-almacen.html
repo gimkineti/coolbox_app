@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}"></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <section th:replace="./fragments/navbarAlmacen"></section>
+    <div class="container">
+        <h1 class="mt-4 mb-4" th:text="${titulo}"></h1>
+        <a class="btn btn-success" th:href="@{/almacen/productos/nuevo}">Agregar Nuevo Producto</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripción</th>
+                    <th>Stock</th>
+                    <th>Marca</th>
+                    <th>Categoría</th>
+                    <th>Precio Venta</th>
+                    <th>Rol</th>
+                    <th>Fecha</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="producto : ${productos}">
+                    <td th:text="${producto.idProducto}"></td>
+                    <td th:text="${producto.descripcionProducto}"></td>
+                    <td th:text="${producto.stockProducto}"></td>
+                    <td th:text="${producto.nombreMarca}"></td>
+                    <td th:text="${producto.nombreCategoria}"></td>
+                    <td th:text="${producto.precioVenta}"></td>
+                    <td th:text="${producto.nombreRol}"></td>
+                    <td th:text="${producto.fechaProducto}"></td>
+                    <td>
+                        <a class="btn btn-primary" 
+                            th:href="@{/almacen/productos/{idProducto}/editar(idProducto=${producto.idProducto})}" th:text="Editar"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>    
+    <section th:replace="./fragments/footer"></section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}"></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <section th:replace="./fragments/navbarAdmin"></section>
+    <div class="container">
+        <h1 class="mt-4 mb-4" th:text="${titulo}"></h1>
+        <a class="btn btn-success" th:href="@{/usuarios/nuevo}">Agregar Nuevo Usuario</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID del Usuario</th>
+                    <th>Rol del Usuario</th>
+                    <th>Nombre del Usuario</th>
+                    <th>Email del Usuario</th>
+                    <th colspan="2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.idUsuario}"></td>
+                    <td th:text="${usuario.nombreRol}"></td>
+		            <td th:text="${usuario.nombreUsuario}"></td>
+		            <td th:text="${usuario.emailUsuario}"></td>
+                    <td>
+                        <a class="btn btn-primary" 
+                            th:href="@{/usuarios/{idUsuario}/editar(idUsuario=${usuario.idUsuario})}" th:text="Editar"></a>
+                        <a class="btn btn-danger" 
+                            th:href="@{/usuarios/{idUsuario}/eliminar(idUsuario=${usuario.idUsuario})}" th:text="Eliminar"
+                            onclick="return confirm('¿Estás seguro de eliminar el usuario?');"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>    
+    <section th:replace="./fragments/footer"></section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
