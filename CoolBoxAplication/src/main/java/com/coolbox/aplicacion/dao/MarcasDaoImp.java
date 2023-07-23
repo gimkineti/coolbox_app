@@ -25,7 +25,7 @@ public class MarcasDaoImp implements IMarcasDao {
     @Override
     @Transactional
     public void guardarMarca(Marcas marca) {
-        entityManager.persist(marca);
+        entityManager.merge(marca);
     }
 
     @Override

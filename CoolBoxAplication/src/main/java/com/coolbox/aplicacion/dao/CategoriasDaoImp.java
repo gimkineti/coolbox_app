@@ -25,7 +25,7 @@ public class CategoriasDaoImp implements ICategoriasDao {
     @Override
     @Transactional
     public void guardarCategoria(Categorias categoria) {
-        entityManager.persist(categoria);
+        entityManager.merge(categoria);
     }
 
     @Override

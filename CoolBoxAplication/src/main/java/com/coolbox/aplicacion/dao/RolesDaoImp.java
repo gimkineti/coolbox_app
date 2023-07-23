@@ -27,7 +27,7 @@ public class RolesDaoImp implements IRolesDao {
     @Override
     @Transactional
     public void guardarRol(Roles rol) {
-        entityManager.persist(rol);
+        entityManager.merge(rol);
     }
 
     @Override
