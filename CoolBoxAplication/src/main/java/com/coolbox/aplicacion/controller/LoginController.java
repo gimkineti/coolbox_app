@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.coolbox.aplicacion.dao.IUsuarioDao;
 import com.coolbox.aplicacion.entity.Usuarios;
@@ -20,7 +19,7 @@ public class LoginController {
 	@Autowired
 	private IUsuarioDao usuarioDao;
 	
-	@GetMapping(value="/login")
+	@GetMapping(value={"/login", "/"})  // Agregamos la ruta por defecto "/"
     public String login(Model m){
         return "login";
     }
@@ -48,11 +47,26 @@ public class LoginController {
 				String nombreRol = usuario.getRolUsuario().getNombreRol();
 
 				if ("ADMINISTRADOR".equals(nombreRol)) {
-					return new ModelAndView(new RedirectView("/home/dashboard"));
+					ModelAndView modelAndView = new ModelAndView("dashboard");
+					modelAndView.addObject("rol", usuario.getRolUsuario().getNombreRol());
+					modelAndView.addObject("nombreUsuario", usuario.getNombreUsuario());
+					modelAndView.addObject("emailUsuario", usuario.getEmailUsuario());
+					modelAndView.addObject("mensaje", "Podrás hacer todas las operaciones CRUD.");
+					return modelAndView;
 				} else if ("ALMACEN".equals(nombreRol)) {
-					return new ModelAndView(new RedirectView("/home/almacen"));
+					ModelAndView modelAndView = new ModelAndView("almacen");
+					modelAndView.addObject("rol", usuario.getRolUsuario().getNombreRol());
+					modelAndView.addObject("nombreUsuario", usuario.getNombreUsuario());
+					modelAndView.addObject("emailUsuario", usuario.getEmailUsuario());
+					modelAndView.addObject("mensaje", "Podrás agregar y editar registros pero no eliminar.");
+					return modelAndView;
 				} else if ("EMPLEADO".equals(nombreRol)) {
-					return new ModelAndView(new RedirectView("/home/empleado"));
+					ModelAndView modelAndView = new ModelAndView("empleado");
+					modelAndView.addObject("rol", usuario.getRolUsuario().getNombreRol());
+					modelAndView.addObject("nombreUsuario", usuario.getNombreUsuario());
+					modelAndView.addObject("emailUsuario", usuario.getEmailUsuario());
+					modelAndView.addObject("mensaje", "Podrás ver la lista de registros pero no hacer ninguna operación.");
+					return modelAndView;
 				} else {
 					// Aquí puedes manejar otras redirecciones o mostrar un mensaje de error si el nombre del rol no coincide con ninguna opción.
 					ModelAndView modelAndView = new ModelAndView("mensaje-error");

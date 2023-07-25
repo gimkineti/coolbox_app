@@ -16,13 +16,10 @@
             </button>
 
             <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-                <a class="navbar-brand col-lg-3 me-0" th:href="@{/}">
+                <a class="navbar-brand col-lg-3 me-0" th:href="@{/login}">
                     <img th:src="@{/images/logo.png}" alt="Logo" width="200" height="50" class="d-inline-block align-text-top">
                 </a>
                 <ul class="navbar-nav col-lg-6 justify-content-lg-center">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/login}">Productos</a>
                     </li>
@@ -34,7 +31,7 @@
                     </li>
                 </ul>
                 <div class="col-md-3 text-end">
-                    <a th:href="@{login}">
+                    <a th:href="@{/login}">
                         <button type="button" class="btn btn-light me-2">
                             <strong>Iniciar Sesión</strong>
                         </button>
