@@ -14,7 +14,7 @@
         <div class="d-flex justify-content-center">
             <h1 class="mt-4 mb-4" th:text="${titulo}"></h1>
         </div>
-        <a class="btn btn-warning mb-3" href="/roles/nuevo">Agregar Nuevo Rol</a>
+        <a class="btn btn-warning mb-3" th:href="@{/roles/nuevo}">Agregar Nuevo Rol</a>
         <table class="table table-striped table-borderless">
             <thead>
                 <tr class="text-center">
@@ -38,6 +38,7 @@
             </tbody>
         </table>
     </div>
+    <br>
     <section th:replace="./fragments/footer"></section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

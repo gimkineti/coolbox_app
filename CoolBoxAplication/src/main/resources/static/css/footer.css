@@ -1,0 +1,34 @@
+/* Estilos para el footer */
+footer.footer-content {
+    background-color: #393939;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer.footer-content a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+footer.footer-content a:hover {
+    color: #dc3545;
+}
+
+footer.footer-content img {
+    display: inline-block; /* Alinea las imágenes horizontalmente */
+    margin-right: 10px;
+    filter: invert(1);
+}
+
+/* Estilos para el texto del footer */
+footer.footer-content span {
+    display: inline-block; /* Alinea el texto horizontalmente */
+    margin-bottom: 5px; /* Ajusta el margen inferior del texto */
+}
+
+/* Estilos para el enlace del texto del footer al pasar el mouse */
+footer.footer-content span:hover {
+    color: #dc3545;
+}

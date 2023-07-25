@@ -81,9 +81,10 @@ public class ProductosController {
 
     @PostMapping("/productos/guardar")
     public String guardarProducto(@ModelAttribute("producto") @Valid Productos producto, BindingResult result,
-            @RequestParam("fechaProducto") @DateTimeFormat(pattern = "yyyy-MM-dd") String fechaProducto, Model model) {
+                                @RequestParam("fechaProducto") @DateTimeFormat(pattern = "yyyy-MM-dd") String fechaProducto,
+                                Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("titulo", "Editar Producto");
+            model.addAttribute("titulo", "Formulario de Producto");
             model.addAttribute("categorias", categoriasDao.listarCategorias());
             model.addAttribute("marcas", marcasDao.listarMarcas());
             model.addAttribute("roles", rolesDao.listarRoles());
@@ -91,46 +92,66 @@ public class ProductosController {
         }
 
         try {
-        	Categorias categoria = categoriasDao.obtenerCategoria(producto.getCategoriaProducto().getIdCategoria());
-        	Marcas marca = marcasDao.obtenerMarca(producto.getMarcaProducto().getIdMarca());
-        	Roles rol = rolesDao.obtenerRol(producto.getRolProducto().getIdRol());
-        	Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
-        	if (descripcionExistente != null) {
-        		String mensaje = "La descripción ya existe";
+            Categorias categoria = categoriasDao.obtenerCategoria(producto.getCategoriaProducto().getIdCategoria());
+            Marcas marca = marcasDao.obtenerMarca(producto.getMarcaProducto().getIdMarca());
+            Roles rol = rolesDao.obtenerRol(producto.getRolProducto().getIdRol());
+
+            // Verificar si es un producto nuevo o un producto existente
+            if (producto.getIdProducto() == null) {
+                // Es un nuevo producto, verificar si ya existe por descripción
+                Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
+
+                if (descripcionExistente != null) {
+                    String mensaje = "La descripción ya existe";
+                    model.addAttribute("titulo", "Error");
+                    model.addAttribute("mensaje", mensaje);
+                    model.addAttribute("direccion", "/productos/nuevo");
+                    return "mensaje-error";
+                }
+            } else {
+                // Es un producto existente, verificar si ya existe por descripción
+                Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
+
+                if (descripcionExistente != null && !descripcionExistente.getIdProducto().equals(producto.getIdProducto())) {
+                    String mensaje = "La descripción ya existe";
+                    model.addAttribute("titulo", "Error");
+                    model.addAttribute("mensaje", mensaje);
+                    model.addAttribute("direccion", "/productos/" + producto.getIdProducto() + "/editar");
+                    return "mensaje-error";
+                }
+            }
+
+            // Verificar si las categorías, marcas y roles existen
+            if (categoria == null) {
+                String mensaje = "La categoría seleccionada no existe";
                 model.addAttribute("titulo", "Error");
                 model.addAttribute("mensaje", mensaje);
                 model.addAttribute("direccion", "/productos/nuevo");
                 return "mensaje-error";
-        	}
-        	else if (categoria == null) {
-        		String mensaje = "La categoria seleccionada no existe";
+            }
+            if (marca == null) {
+                String mensaje = "La marca seleccionada no existe";
                 model.addAttribute("titulo", "Error");
                 model.addAttribute("mensaje", mensaje);
                 model.addAttribute("direccion", "/productos/nuevo");
                 return "mensaje-error";
-        	}
-        	else if (marca == null) {
-        		String mensaje = "La marca seleccionada no existe";
+            }
+            if (rol == null) {
+                String mensaje = "El rol seleccionado no existe";
                 model.addAttribute("titulo", "Error");
                 model.addAttribute("mensaje", mensaje);
                 model.addAttribute("direccion", "/productos/nuevo");
                 return "mensaje-error";
-        	}
-        	else if (rol == null) {
-        		String mensaje = "El rol seleccionado no existe";
-                model.addAttribute("titulo", "Error");
-                model.addAttribute("mensaje", mensaje);
-                model.addAttribute("direccion", "/productos/nuevo");
-                return "mensaje-error";
-        	} else {
-        		producto.setCategoriaProducto(categoria);
-            	producto.setMarcaProducto(marca);
-            	producto.setRolProducto(rol);
-                java.sql.Date fecha = java.sql.Date.valueOf(fechaProducto);
-                producto.setFechaProducto(fecha);
-                productosDao.guardarProducto(producto);
-                return "redirect:/productos";
-        	}
+            }
+
+            producto.setCategoriaProducto(categoria);
+            producto.setMarcaProducto(marca);
+            producto.setRolProducto(rol);
+            java.sql.Date fecha = java.sql.Date.valueOf(fechaProducto);
+            producto.setFechaProducto(fecha);
+
+            productosDao.guardarProducto(producto);
+            return "redirect:/productos";
         } catch (Exception e) {
             String mensaje = "Error al guardar el producto: " + e.getMessage();
             model.addAttribute("titulo", "Error");

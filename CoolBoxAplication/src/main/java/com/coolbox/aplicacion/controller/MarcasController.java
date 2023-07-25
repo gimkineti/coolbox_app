@@ -34,11 +34,16 @@ public class MarcasController {
     @PostMapping("/marcas/guardar")
     public String guardarMarca(@ModelAttribute("marca") Marcas marca, Model model) {
         Marcas marcaExistente = marcasDao.obtenerMarcaPorNombre(marca.getNombreMarca());
-        if (marcaExistente != null) {
+        if (marcaExistente != null && !marcaExistente.getIdMarca().equals(marca.getIdMarca())) {
             String mensaje = "La marca ya existe";
             model.addAttribute("titulo", "Error");
-            model.addAttribute("mensaje", mensaje);
-            model.addAttribute("direccion", "/marcas/nuevo");
+			model.addAttribute("mensaje", mensaje);
+
+            if (marca.getIdMarca() != null) {
+                model.addAttribute("direccion", "/marcas/" + marca.getIdMarca() + "/editar");
+            } else {
+                model.addAttribute("direccion", "/marcas/nuevo");
+            }
             return "mensaje-error";
         } else {
             marcasDao.guardarMarca(marca);

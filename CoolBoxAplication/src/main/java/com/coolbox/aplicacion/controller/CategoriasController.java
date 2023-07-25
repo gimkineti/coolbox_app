@@ -34,16 +34,22 @@ public class CategoriasController {
 	@PostMapping(value = "/categorias/guardar")
 	public String guardarCategoria(@ModelAttribute("categoria") Categorias categoria, Model model) {
 		Categorias categoriaExistente = categoriaDao.obtenerCategoriaPorNombre(categoria.getNombreCategoria());
-		if (categoriaExistente != null) {
+		if (categoriaExistente != null && !categoriaExistente.getIdCategoria().equals(categoria.getIdCategoria())) {
 			String mensaje = "La categoria ya existe";
-            model.addAttribute("titulo", "Error");
-            model.addAttribute("mensaje", mensaje);
-            model.addAttribute("direccion", "/categorias/nuevo");
-            return "mensaje-error";
-	    } else {
-	        categoriaDao.guardarCategoria(categoria);
-	        return "redirect:/categorias";
-	    }
+			model.addAttribute("titulo", "Error");
+			model.addAttribute("mensaje", mensaje);
+			// Guardamos el ID de la categoría para redireccionar al formulario de edición
+			if (categoria.getIdCategoria() != null) {
+				model.addAttribute("direccion", "/categorias/" + categoria.getIdCategoria() + "/editar");
+			} else {
+				// Si el idCategoria es nulo, significa que es una nueva categoría, así que volvemos al formulario para agregar una nueva categoría
+				model.addAttribute("direccion", "/categorias/nuevo");
+			}
+			return "mensaje-error";
+		} else {
+			categoriaDao.guardarCategoria(categoria);
+			return "redirect:/categorias";
+		}
 	}
 	
 	@GetMapping(value = "/categorias/{idCategoria}/editar")

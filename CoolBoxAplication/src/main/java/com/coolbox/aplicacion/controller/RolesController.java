@@ -38,7 +38,12 @@ public class RolesController {
     		String mensaje = "El rol ya existe";
             model.addAttribute("titulo", "Error");
             model.addAttribute("mensaje", mensaje);
-            model.addAttribute("direccion", "/roles/nuevo");
+
+            if (rol.getIdRol() != null) {
+                model.addAttribute("direccion", "/roles/" + rol.getIdRol() + "/editar");
+            } else {
+                model.addAttribute("direccion", "/roles/nuevo");
+            }
             return "mensaje-error";
     	} else {
     		rolesDao.guardarRol(rol);

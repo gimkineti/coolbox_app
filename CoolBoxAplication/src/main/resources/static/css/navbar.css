@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Estilos personalizados para el navbar */
+nav.navbar {
+    background-color: #000000; /* Fondo negro */
+    color: #fff; /* Texto blanco */
+    padding: 10px 0; /* Espacio interno */
+}
+
+/* Estilos para el enlace del logo en el navbar */
+nav.navbar a.navbar-brand {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+/* Estilos para los enlaces del menú en el navbar */
+nav.navbar ul.navbar-nav li.nav-item a.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 15px;
+}
+
+/* Estilos para el botón "Iniciar Sesión" en el navbar */
+nav.navbar div.text-end button.btn.btn-light {
+    font-size: 16px;
+    padding: 8px 20px;
+}
+
+/* Estilos para el botón "Iniciar Sesión" en el hover */
+nav.navbar div.text-end button.btn.btn-light:hover {
+    background-color: #fff;
+    color: #000;
+}
