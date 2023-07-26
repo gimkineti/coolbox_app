@@ -7,9 +7,32 @@
     <title>Home Almacen</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
 </head>
-<body>
+<body style="background-color: #f8f9fa;">
     <section th:replace="./fragments/navbarAlmacen"></section>
-    <section th:replace="./fragments/mensajeBienvenida"></section>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-header bg-success text-white text-center">
+                        <h3>Bienvenido Almacenero</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-center fs-5">
+                            Actualmente has iniciado sesión como Almacenero.
+                        </p>
+                        <p class="card-text text-center fs-5">
+                            En este panel podrás realizar operaciones como registrar y editar.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-success text-white text-center">
+                        <h5>Ten un buen día.</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
     <section th:replace="./fragments/footer"></section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

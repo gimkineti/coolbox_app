@@ -26,7 +26,7 @@ public class EmpleadoController {
     
 
     @GetMapping(value="/home/empleado")
-    public String login(Model m){
+    public String home(Model m){
         return "empleado";
     }
 

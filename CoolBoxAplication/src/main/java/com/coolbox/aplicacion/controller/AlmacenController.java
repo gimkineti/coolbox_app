@@ -41,7 +41,7 @@ public class AlmacenController {
     private IRolesDao rolesDao;
     
     @GetMapping(value="/home/almacen")
-    public String login(Model m){
+    public String home(Model m){
         return "almacen";
     }
     

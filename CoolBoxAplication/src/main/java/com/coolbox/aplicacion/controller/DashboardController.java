@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class Dashboard {
+public class DashboardController {
 	@RequestMapping("/home/dashboard")
 	public String home(Model m) {
 		return "dashboard";
