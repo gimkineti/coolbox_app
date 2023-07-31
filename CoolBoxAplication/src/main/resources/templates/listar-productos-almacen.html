@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${titulo}"></title>
+    <link rel="stylesheet" href="/css/producto.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -21,7 +22,6 @@
                     <th>Marca</th>
                     <th>Categoría</th>
                     <th>Precio Venta</th>
-                    <th>Rol</th>
                     <th>Fecha</th>
                     <th>Acción</th>
                 </tr>
@@ -34,7 +34,6 @@
                     <td th:text="${producto.nombreMarca}"></td>
                     <td th:text="${producto.nombreCategoria}"></td>
                     <td th:text="${producto.precioVenta}"></td>
-                    <td th:text="${producto.nombreRol}"></td>
                     <td th:text="${producto.fechaProducto}"></td>
                     <td>
                         <a class="btn btn-primary" 
