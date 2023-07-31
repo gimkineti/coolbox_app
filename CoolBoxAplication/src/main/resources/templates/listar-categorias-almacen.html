@@ -10,28 +10,32 @@
 <body>
     <section th:replace="./fragments/navbarAlmacen"></section>
     <div class="container">
-        <h1 class="mt-4 mb-4" th:text="${titulo}"></h1>
-        <a class="btn btn-success" th:href="@{/almacen/categorias/nuevo}">Agregar Nueva Categoria</a>
-        <table class="table table-striped">
+        <div class="d-flex justify-content-center">
+            <h1 class="mt-4 mb-4" th:text="${titulo}"></h1>
+        </div>
+        <a class="btn btn-warning mb-3" th:href="@{/almacen/categorias/nuevo}">Agregar Nueva Categoria</a>
+        <table class="table table-striped table-borderless">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>ID de la Categoria</th>
                     <th>Nombre de la Categoria</th>
-                    <th>Acción</th>
+                    <th colspan="2">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="categoria : ${categorias}">
-                    <td th:text="${categoria.idCategoria}"></td>
-                    <td th:text="${categoria.nombreCategoria}"></td>
-                    <td>
-                        <a class="btn btn-primary" 
-                            th:href="@{/almacen/categorias/{idCategoria}/editar(idCategoria=${categoria.idCategoria})}" th:text="Editar"></a>
+                <tr th:each="categoria : ${categorias}" class="text-center">
+                    <td class="align-middle" th:text="${categoria.idCategoria}"></td>
+                    <td class="align-middle" th:text="${categoria.nombreCategoria}"></td>
+                    <td class="d-flex justify-content-center align-items-center">
+                        <a class="btn btn-primary mx-2 my-1" 
+                            th:href="@{/almacen/categorias/{idCategoria}/editar(idCategoria=${categoria.idCategoria})}"
+                            th:text="Editar"></a>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <br>
     <section th:replace="./fragments/footer"></section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

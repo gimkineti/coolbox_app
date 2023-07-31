@@ -11,34 +11,35 @@
 <body>
     <section th:replace="./fragments/navbarEmpleado"></section>
     <div class="container">
-        <h1 class="mt-4 mb-4" th:text="${titulo}"></h1>
-        <table class="table table-striped">
+        <div class="d-flex justify-content-center">
+            <h1 class="mt-4 mb-4" th:text="${titulo}"></h1>
+        </div>
+        <table class="table table-striped table-borderless">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>ID</th>
                     <th>Descripción</th>
                     <th>Stock</th>
                     <th>Marca</th>
                     <th>Categoría</th>
                     <th>Precio Venta</th>
-                    <th>Rol</th>
                     <th>Fecha</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="producto : ${productos}">
-                    <td th:text="${producto.idProducto}"></td>
-                    <td th:text="${producto.descripcionProducto}"></td>
-                    <td th:text="${producto.stockProducto}"></td>
-                    <td th:text="${producto.nombreMarca}"></td>
-                    <td th:text="${producto.nombreCategoria}"></td>
-                    <td th:text="${producto.precioVenta}"></td>
-                    <td th:text="${producto.nombreRol}"></td>
-                    <td th:text="${producto.fechaProducto}"></td>
+                <tr th:each="producto : ${productos}" class="text-center">
+                    <td class="align-middle" th:text="${producto.idProducto}"></td>
+                    <td class="align-middle" th:text="${producto.descripcionProducto}"></td>
+                    <td class="align-middle" th:text="${producto.stockProducto}"></td>
+                    <td class="align-middle" th:text="${producto.nombreMarca}"></td>
+                    <td class="align-middle" th:text="${producto.nombreCategoria}"></td>
+                    <td class="align-middle" th:text="${producto.precioVenta}"></td>
+                    <td class="align-middle" th:text="${producto.fechaProducto}"></td>                    
                 </tr>
             </tbody>
-        </table>
-    </div>    
+        </table>             
+    </div>
+    <br>
     <section th:replace="./fragments/footer"></section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

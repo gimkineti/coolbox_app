@@ -10,16 +10,15 @@
 </head>
 <body>
     <section th:replace="~{./fragments/navbarAlmacen}"></section>
-    <div class="container">
-        <h2 th:text="${titulo}"></h2>
-        <form th:action="@{/almacen/productos/guardar}" method="post" class="form container" th:object="${producto}">
-            <div class="row justify-content-center mt-5">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header bg-primary text-white text-center">
-                            <h3 class="card-title" th:text="${titulo}"></h3>
-                        </div>
-                        <div class="card-body">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h3 class="card-title" th:text="${titulo}"></h3>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/almacen/productos/guardar}" method="post" class="form container" th:object="${producto}">
                             <input type="hidden" th:field="*{idProducto}" />
                             <div class="mb-3">
                                 <label for="descripcionProducto" class="form-label">Descripción del Producto:</label>
@@ -67,15 +66,17 @@
                                 <button type="submit" class="btn btn-primary">Registrar</button>
                                 <button class="btn btn-secondary" type="reset">Limpiar</button>
                             </div>
-                        </div>
-                        <div class="card-footer text-center">
-                            <span>¿Desea cancelar el registro? </span><a th:href="@{/almacen/productos}">Cancelar</a>
-                        </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a th:href="@{/almacen/productos}" class="btn btn-outline-secondary">Cancelar</a>
                     </div>
                 </div>
             </div>
-        </form>    
+        </div>
     </div>
+    <br>
+    <br>
     <section th:replace="./fragments/footer"></section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
