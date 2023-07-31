@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <section th:replace="./fragments/navbarEmpleado"></section>
+    <section th:replace="~{./fragments/navbarEmpleado}"></section>
     <div class="container">
         <div class="d-flex justify-content-center">
             <h1 class="mt-4 mb-4" th:text="${titulo}"></h1>
@@ -40,7 +40,7 @@
         </table>             
     </div>
     <br>
-    <section th:replace="./fragments/footer"></section>
+    <section th:replace="~{./fragments/footer}"></section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
