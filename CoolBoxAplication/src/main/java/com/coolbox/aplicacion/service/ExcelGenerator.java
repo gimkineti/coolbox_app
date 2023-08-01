@@ -47,7 +47,7 @@ public class ExcelGenerator {
             headerFont.setBold(true);
             headerFont.setFontHeightInPoints((short) 16);
             headerCellStyle.setFont(headerFont);
-            headerCellStyle.setFillForegroundColor(IndexedColors.GREEN.getIndex());
+            headerCellStyle.setFillForegroundColor(IndexedColors.INDIGO.getIndex());
             headerCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
             // Crear la fila del encabezado
@@ -70,7 +70,7 @@ public class ExcelGenerator {
             dataFont1.setColor(IndexedColors.BLACK.getIndex());
             dataFont1.setFontHeightInPoints((short) 12);
             dataCellStyle1.setFont(dataFont1);
-            dataCellStyle1.setFillForegroundColor(IndexedColors.LIGHT_GREEN.getIndex());
+            dataCellStyle1.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
             dataCellStyle1.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
             CellStyle dataCellStyle2 = workbook.createCellStyle();

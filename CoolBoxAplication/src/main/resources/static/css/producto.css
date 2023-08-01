@@ -27,3 +27,21 @@
     background-color: #f39c12;
     border-color: #f39c12; 
 }
+/* Agrega estilos personalizados para las imágenes de exportación */
+.btn-export {
+    display: inline-block;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.btn-export img {
+    width: 50px;
+    height: 50px;
+}
+
+/* Efecto de escala al pasar el mouse sobre las imágenes de exportación */
+.btn-export:hover {
+    transform: scale(1.1);
+}

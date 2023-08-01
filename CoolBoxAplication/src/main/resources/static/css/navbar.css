@@ -37,3 +37,12 @@ nav.navbar div.text-end button.btn.btn-light:hover {
 nav.navbar ul.navbar-nav li.nav-item a.nav-link:hover {
     color: #c2c2c2; /* Cambia el color del texto al pasar el mouse */
 }
+.bg-custome {
+    background-color: darkslateblue; /* Color personalizado en formato hexadecimal */
+}
+.bg-customn {
+    background-color: seagreen; /* Color personalizado en formato hexadecimal */
+}
+.bg-customa {
+    background-color: darkgoldenrod; /* Color personalizado en formato hexadecimal */
+}

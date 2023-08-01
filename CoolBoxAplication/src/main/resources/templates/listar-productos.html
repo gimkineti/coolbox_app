@@ -49,13 +49,13 @@
             </tbody>
         </table>             
         <div class="d-flex justify-content-center mb-3">
-            <a th:href="@{/productos/exportar-pdf}" class="btn btn-light">
-                <img src="/images/pdf.png" alt="Exportar a PDF" width="50" height="50" />
+            <a th:href="@{/productos/exportar-pdf}" class="btn btn-export">
+                <img src="/images/pdf.png" alt="Exportar a PDF" />
             </a>
-            <a th:href="@{/productos/exportar-excel}" class="btn btn-light">
-                <img src="/images/xls.png" alt="Exportar a EXCEL" width="50" height="50" />
+            <a th:href="@{/productos/exportar-excel}" class="btn btn-export">
+                <img src="/images/xls.png" alt="Exportar a EXCEL" />
             </a>
-        </div>
+        </div>        
     </div>
     <br>
     <section th:replace="~{./fragments/footer}"></section>
