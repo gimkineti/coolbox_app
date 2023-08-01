@@ -21,7 +21,7 @@
                         <form th:action="@{/roles/guardar}" method="post" class="form container" th:object="${rol}">
                             <input type="hidden" th:field="*{idRol}" />
                             <div class="mb-3">
-                                <label for="nombreRol" class="form-label">Nombre del Rol:</label>
+                                <label for="nombreRol" class="form-label">Nombre del Rol</label>
                                 <input type="text" class="form-control" id="nombreRol" th:field="*{nombreRol}" required />
                             </div>
                             <div class="d-grid gap-2">

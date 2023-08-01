@@ -1,13 +1,12 @@
-/* Estilos para el footer */
 footer.footer-content {
-    background-color: #393939;
-    color: #fff;
-    padding: 20px 0;
+    background-color: transparent;
+    color: #000;
+    font-size: 20px;
     text-align: center;
 }
 
 footer.footer-content a {
-    color: #fff;
+    color: #000;
     text-decoration: none;
     transition: color 0.3s ease-in-out;
 }
@@ -17,18 +16,17 @@ footer.footer-content a:hover {
 }
 
 footer.footer-content img {
-    display: inline-block; /* Alinea las imágenes horizontalmente */
+    display: inline-block;
     margin-right: 10px;
-    filter: invert(1);
+    width: 35px;
+    height: 35px;
 }
 
-/* Estilos para el texto del footer */
 footer.footer-content span {
-    display: inline-block; /* Alinea el texto horizontalmente */
-    margin-bottom: 5px; /* Ajusta el margen inferior del texto */
+    display: inline-block;
+    margin-bottom: 5px;
 }
 
-/* Estilos para el enlace del texto del footer al pasar el mouse */
 footer.footer-content span:hover {
     color: #dc3545;
 }

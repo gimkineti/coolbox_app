@@ -21,15 +21,15 @@
                         <form th:action="@{/productos/guardar}" method="post" class="form container" th:object="${producto}">
                             <input type="hidden" th:field="*{idProducto}" />
                             <div class="mb-3">
-                                <label for="descripcionProducto" class="form-label">Descripción del Producto:</label>
+                                <label for="descripcionProducto" class="form-label">Descripción del Producto</label>
                                 <input type="text" class="form-control" id="descripcionProducto" th:field="*{descripcionProducto}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="stockProducto" class="form-label">Stock del Producto:</label>
+                                <label for="stockProducto" class="form-label">Stock del Producto</label>
                                 <input type="number" class="form-control" id="stockProducto" th:field="*{stockProducto}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="marcaProducto" class="form-label">Marca</label>
+                                <label for="marcaProducto" class="form-label">Marca del Producto</label>
                                 <select class="form-select" id="marcaProducto" name="marcaProducto.idMarca" required>
                                     <option th:each="marca : ${marcas}" th:value="${marca.idMarca}"
                                             th:text="${marca.nombreMarca}"
@@ -37,11 +37,11 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="precioVenta" class="form-label">Precio de Venta del Producto:</label>
+                                <label for="precioVenta" class="form-label">Precio de Venta</label>
                                 <input type="number" step="0.01" class="form-control" id="precioVenta" th:field="*{precioVenta}" required>
                             </div>
                             <div class="mb-3">
-							    <label for="rolProducto" class="form-label">Rol</label>
+							    <label for="rolProducto" class="form-label">Rol del Usuario</label>
 							    <select class="form-select" id="rolProducto" name="rolProducto.idRol" required>
 						            <option th:each="rol : ${roles}" th:value="${rol.idRol}"
 						                    th:text="${rol.nombreRol}"
@@ -49,7 +49,7 @@
 						        </select>
 							</div>
                             <div class="mb-3">
-                                <label for="fechaProducto" class="form-label">Fecha del Producto</label>
+                                <label for="fechaProducto" class="form-label">Fecha de Ingreso</label>
                                 <input type="date" class="form-control" id="fechaProducto" name="fechaProducto" th:value="${producto.fechaProducto != null ? #dates.format(producto.fechaProducto, 'yyyy-MM-dd') : ''}" required>
                                 <div th:if="${#fields.hasErrors('fechaProducto')}" class="invalid-feedback">
                                     <span th:errors="*{fechaProducto}"></span>

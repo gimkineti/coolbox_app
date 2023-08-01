@@ -1,38 +1,39 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-}
-
 /* Estilos personalizados para el navbar */
 nav.navbar {
-    background-color: #000000; /* Fondo negro */
-    color: #fff; /* Texto blanco */
     padding: 10px 0; /* Espacio interno */
 }
 
 /* Estilos para el enlace del logo en el navbar */
-nav.navbar a.navbar-brand {
-    color: #fff;
-    text-decoration: none;
-    font-size: 20px;
+nav.navbar a.navbar-brand img {
+    width: 200px; /* Ancho deseado en píxeles */
+    height: 50px; /* Alto deseado en píxeles */
 }
 
 /* Estilos para los enlaces del menú en el navbar */
+nav.navbar ul.navbar-nav li.nav-item {
+    list-style: none; /* Quitar viñetas de la lista */
+    margin-right: 15px; /* Espacio entre elementos del menú */
+}
+
 nav.navbar ul.navbar-nav li.nav-item a.nav-link {
-    color: #fff;
-    text-decoration: none;
     font-size: 18px;
-    padding: 5px 15px;
+    color: #fff; /* Texto blanco */
+    transition: color 0.3s; /* Transición para el cambio de color */
 }
 
 /* Estilos para el botón "Iniciar Sesión" en el navbar */
 nav.navbar div.text-end button.btn.btn-light {
     font-size: 16px;
-    padding: 8px 20px;
+    color: #000; /* Texto negro */
 }
 
 /* Estilos para el botón "Iniciar Sesión" en el hover */
 nav.navbar div.text-end button.btn.btn-light:hover {
-    background-color: #fff;
+    background-color: #c2c2c2;
     color: #000;
+}
+
+/* Estilos para el enlace del menú en el hover */
+nav.navbar ul.navbar-nav li.nav-item a.nav-link:hover {
+    color: #c2c2c2; /* Cambia el color del texto al pasar el mouse */
 }

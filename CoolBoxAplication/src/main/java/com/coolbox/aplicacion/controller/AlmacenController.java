@@ -152,7 +152,7 @@ public class AlmacenController {
     @GetMapping(value = "/almacen/categorias")
 	public String listarCategorias(Model model) {
 		model.addAttribute("categorias", categoriasDao.listarCategorias());
-		model.addAttribute("titulo", "Crud de Categorias");
+		model.addAttribute("titulo", "Lista de Categorias");
 		return "listar-categorias-almacen";
 	}
 	
@@ -192,7 +192,7 @@ public class AlmacenController {
 	@GetMapping("/almacen/marcas")
     public String listarMarcas(Model model) {
         model.addAttribute("marcas", marcasDao.listarMarcas());
-        model.addAttribute("titulo", "Crud de Marcas");
+        model.addAttribute("titulo", "Lista de Marcas");
         return "listar-marcas-almacen";
     }
 

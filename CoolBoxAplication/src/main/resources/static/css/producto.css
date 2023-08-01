@@ -1,29 +1,29 @@
 .table thead th {
-    background-color: SteelBlue; /* Fondo SteelBlue */
-    color: #fff; /* Texto blanco */
+    background-color: SteelBlue;
+    color: #fff;
+    vertical-align: middle;
 }
-/* Estilos personalizados para los botones */
 .btn-primary {
-    background-color: #3498db; /* Azul celeste claro */
-    border-color: #3498db; /* Borde azul celeste claro */
+    background-color: #3498db;
+    border-color: #3498db;
 }
 .btn-primary:hover {
-    background-color: #2980b9; /* Azul celeste oscuro */
-    border-color: #2980b9; /* Borde azul celeste oscuro */
+    background-color: #2980b9;
+    border-color: #2980b9;
 }
 .btn-danger {
-    background-color: #e74c3c; /* Rojo */
-    border-color: #e74c3c; /* Borde rojo */
+    background-color: #e74c3c;
+    border-color: #e74c3c;
 }
 .btn-danger:hover {
-    background-color: #c0392b; /* Rojo oscuro */
-    border-color: #c0392b; /* Borde rojo oscuro */
+    background-color: #c0392b;
+    border-color: #c0392b;
 }
 .btn-light {
-    background-color: #f1c40f; /* Amarillo */
-    border-color: #f1c40f; /* Borde amarillo */
+    background-color: #f1c40f;
+    border-color: #f1c40f;
 }
 .btn-light:hover {
-    background-color: #f39c12; /* Amarillo oscuro */
-    border-color: #f39c12; /* Borde amarillo oscuro */
+    background-color: #f39c12;
+    border-color: #f39c12; 
 }
