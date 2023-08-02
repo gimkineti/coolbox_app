@@ -1,33 +1,46 @@
+/* Estilos para la tabla */
 .table thead th {
     background-color: SteelBlue;
     color: #fff;
     vertical-align: middle;
 }
+
+.table tbody td {
+    vertical-align: middle;
+}
+
+/* Estilos para los botones */
 .btn-primary {
     background-color: #3498db;
     border-color: #3498db;
 }
+
 .btn-primary:hover {
     background-color: #2980b9;
     border-color: #2980b9;
 }
+
 .btn-danger {
     background-color: #e74c3c;
     border-color: #e74c3c;
 }
+
 .btn-danger:hover {
     background-color: #c0392b;
     border-color: #c0392b;
 }
-.btn-light {
+
+.btn-warning {
     background-color: #f1c40f;
     border-color: #f1c40f;
 }
-.btn-light:hover {
+
+.btn-warning:hover {
     background-color: #f39c12;
     border-color: #f39c12; 
 }
-/* Agrega estilos personalizados para las imágenes de exportación */
+
+/* Estilos para las imágenes de exportación */
 .btn-export {
     display: inline-block;
     border: none;

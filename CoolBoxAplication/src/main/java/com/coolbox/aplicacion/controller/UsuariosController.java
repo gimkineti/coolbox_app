@@ -93,13 +93,19 @@ public class UsuariosController {
                 Usuarios usuarioExistentePorNombre = usuarioDao.obtenerUsuarioPorNombre(usuario.getNombreUsuario());
                 Usuarios usuarioExistentePorEmail = usuarioDao.obtenerUsuarioPorEmail(usuario.getEmailUsuario());
 
-                if (usuarioExistentePorNombre != null && !usuarioExistentePorNombre.getIdUsuario().equals(usuario.getIdUsuario())) {
+                if (usuarioExistentePorNombre != null && usuarioExistentePorEmail != null) {
+                    String mensaje = "El usuario y el email ya existe";
+                    model.addAttribute("titulo", "Error");
+                    model.addAttribute("mensaje", mensaje);
+                    model.addAttribute("direccion", "/usuarios/" + usuario.getIdUsuario() + "/editar");
+                    return "mensaje-error";
+                } else if (usuarioExistentePorNombre != null) {
                     String mensaje = "El usuario ya existe";
                     model.addAttribute("titulo", "Error");
                     model.addAttribute("mensaje", mensaje);
                     model.addAttribute("direccion", "/usuarios/" + usuario.getIdUsuario() + "/editar");
                     return "mensaje-error";
-                } else if (usuarioExistentePorEmail != null && !usuarioExistentePorEmail.getIdUsuario().equals(usuario.getIdUsuario())) {
+                } else if (usuarioExistentePorEmail != null) {
                     String mensaje = "El email ya existe";
                     model.addAttribute("titulo", "Error");
                     model.addAttribute("mensaje", mensaje);
