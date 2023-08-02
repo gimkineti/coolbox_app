@@ -36,7 +36,7 @@ public class ProductosDaoImp implements IProductosDao{
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public Productos obtenerProducto(Long idProducto) {
         return entityManager.find(Productos.class, idProducto);
     }
@@ -51,7 +51,7 @@ public class ProductosDaoImp implements IProductosDao{
     }
     
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public Productos obtenerProductoPorDescripcion(String descripcionProducto) {
         try {
             return entityManager.createQuery("SELECT p from Productos p WHERE p.descripcionProducto = :descripcion", Productos.class)

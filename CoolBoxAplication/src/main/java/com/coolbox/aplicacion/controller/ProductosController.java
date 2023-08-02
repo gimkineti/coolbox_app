@@ -92,6 +92,9 @@ public class ProductosController {
         }
 
         try {
+            Marcas marca = marcasDao.obtenerMarca(producto.getMarcaProducto().getIdMarca());
+            Categorias categoria = categoriasDao.obtenerCategoria(producto.getCategoriaProducto().getIdCategoria());
+            Roles rol = rolesDao.obtenerRol(producto.getRolProducto().getIdRol());
             // Verificar si es un producto nuevo o un producto existente
             if (producto.getIdProducto() == null) {
                 // Es un nuevo producto, verificar si ya existe por descripción
@@ -104,30 +107,29 @@ public class ProductosController {
                     model.addAttribute("direccion", "/productos/nuevo");
                     return "mensaje-error";
                 }
+                producto.setCategoriaProducto(categoria);
+                producto.setMarcaProducto(marca);
+                producto.setRolProducto(rol);
+                java.sql.Date fecha = java.sql.Date.valueOf(fechaProducto);
+                producto.setFechaProducto(fecha);
+                productosDao.guardarProducto(producto);
             } else {
                 // Es un producto existente, verificar si la descripción ya existe para otro producto
                 Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
-                if (descripcionExistente != null && !descripcionExistente.getIdProducto().equals(producto.getIdProducto())) {
-                    String mensaje = "La descripción ya existe para otro producto";
+                if (descripcionExistente != null) {
+                    String mensaje = "La descripción ya existe";
                     model.addAttribute("titulo", "Error");
                     model.addAttribute("mensaje", mensaje);
                     model.addAttribute("direccion", "/productos/" + producto.getIdProducto() + "/editar");
                     return "mensaje-error";
                 }
+                producto.setCategoriaProducto(categoria);
+                producto.setMarcaProducto(marca);
+                producto.setRolProducto(rol);
+                java.sql.Date fecha = java.sql.Date.valueOf(fechaProducto);
+                producto.setFechaProducto(fecha);
+                productosDao.guardarProducto(producto);
             }
-
-            Categorias categoria = categoriasDao.obtenerCategoria(producto.getCategoriaProducto().getIdCategoria());
-            Marcas marca = marcasDao.obtenerMarca(producto.getMarcaProducto().getIdMarca());
-            Roles rol = rolesDao.obtenerRol(producto.getRolProducto().getIdRol());
-
-            producto.setCategoriaProducto(categoria);
-            producto.setMarcaProducto(marca);
-            producto.setRolProducto(rol);
-            java.sql.Date fecha = java.sql.Date.valueOf(fechaProducto);
-            producto.setFechaProducto(fecha);
-
-            productosDao.guardarProducto(producto);
-
             return "redirect:/productos";
         } catch (Exception e) {
             String mensaje = "Error al guardar el producto: " + e.getMessage();

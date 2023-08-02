@@ -84,37 +84,42 @@ public class AlmacenController {
         try {
             Categorias categoria = categoriasDao.obtenerCategoria(producto.getCategoriaProducto().getIdCategoria());
             Marcas marca = marcasDao.obtenerMarca(producto.getMarcaProducto().getIdMarca());
-            Roles rolAlmacen = rolesDao.obtenerRolPorNombre("ALMACEN");
-            Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
-        	if (descripcionExistente != null) {
-        		String mensaje = "La descripción ya existe";
-                model.addAttribute("titulo", "Error");
-                model.addAttribute("mensaje", mensaje);
-                model.addAttribute("direccion", "/almacen/productos/nuevo");
-                return "mensaje-error";
-        	}
-        	else if (categoria == null) {
-        		String mensaje = "La categoria seleccionada no existe";
-                model.addAttribute("titulo", "Error");
-                model.addAttribute("mensaje", mensaje);
-                model.addAttribute("direccion", "/almacen/productos/nuevo");
-                return "mensaje-error";
-        	}
-        	else if (marca == null) {
-        		String mensaje = "La marca seleccionada no existe";
-                model.addAttribute("titulo", "Error");
-                model.addAttribute("mensaje", mensaje);
-                model.addAttribute("direccion", "/almacen/productos/nuevo");
-                return "mensaje-error";
-        	} else {
-        		producto.setCategoriaProducto(categoria);
-            	producto.setMarcaProducto(marca);
-            	producto.setRolProducto(rolAlmacen);
+            Roles rol = rolesDao.obtenerRolPorNombre("ALMACEN");
+
+            if (producto.getIdProducto() == null) {
+                Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
+
+                if (descripcionExistente != null) {
+                    String mensaje = "La descripción ya existe";
+                    model.addAttribute("titulo", "Error");
+                    model.addAttribute("mensaje", mensaje);
+                    model.addAttribute("direccion", "/almacen/productos/nuevo");
+                    return "mensaje-error";
+                }
+                producto.setCategoriaProducto(categoria);
+                producto.setMarcaProducto(marca);
+                producto.setRolProducto(rol);
                 java.sql.Date fecha = java.sql.Date.valueOf(fechaProducto);
                 producto.setFechaProducto(fecha);
                 productosDao.guardarProducto(producto);
-                return "redirect:/almacen/productos";
+            } else {
+                // Es un producto existente, verificar si la descripción ya existe para otro producto
+                Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
+                if (descripcionExistente != null) {
+                    String mensaje = "La descripción ya existe";
+                    model.addAttribute("titulo", "Error");
+                    model.addAttribute("mensaje", mensaje);
+                    model.addAttribute("direccion", "/almacen/productos/" + producto.getIdProducto() + "/editar");
+                    return "mensaje-error";
+                }
+                producto.setCategoriaProducto(categoria);
+                producto.setMarcaProducto(marca);
+                producto.setRolProducto(rol);
+                java.sql.Date fecha = java.sql.Date.valueOf(fechaProducto);
+                producto.setFechaProducto(fecha);
+                productosDao.guardarProducto(producto);
             }
+            return "redirect:/almacen/productos";
         } catch (Exception e) {
             String mensaje = "Error al guardar el producto: " + e.getMessage();
             model.addAttribute("titulo", "Error");
@@ -170,8 +175,13 @@ public class AlmacenController {
 			String mensaje = "La categoria ya existe";
             model.addAttribute("titulo", "Error");
             model.addAttribute("mensaje", mensaje);
-            model.addAttribute("direccion", "/almacen/categorias/nuevo");
-            return "mensaje-error";
+            if (categoria.getIdCategoria() != null) {
+				model.addAttribute("direccion", "/almacen/categorias/" + categoria.getIdCategoria() + "/editar");
+			} else {
+				// Si el idCategoria es nulo, significa que es una nueva categoría, así que volvemos al formulario para agregar una nueva categoría
+				model.addAttribute("direccion", "/almacen/categorias/nuevo");
+			}
+			return "mensaje-error";
 	    } else {
 	        categoriasDao.guardarCategoria(categoria);
 	        return "redirect:/almacen/categorias";
@@ -210,7 +220,11 @@ public class AlmacenController {
             String mensaje = "La marca ya existe";
             model.addAttribute("titulo", "Error");
             model.addAttribute("mensaje", mensaje);
-            model.addAttribute("direccion", "/almacen/marcas/nuevo");
+            if (marca.getIdMarca() != null) {
+                model.addAttribute("direccion", "/almacen/marcas/" + marca.getIdMarca() + "/editar");
+            } else {
+                model.addAttribute("direccion", "/almacen/marcas/nuevo");
+            }
             return "mensaje-error";
         } else {
             marcasDao.guardarMarca(marca);
