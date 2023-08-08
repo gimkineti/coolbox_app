@@ -28,6 +28,8 @@ public class RolesController {
     public String mostrarFormularioNuevoRol(Model model) {
         model.addAttribute("rol", new Roles());
         model.addAttribute("titulo", "Crear Nuevo Rol");
+        model.addAttribute("boton", "Registrar");
+        model.addAttribute("modo", "registro");
         return "formulario-rol";
     }
 
@@ -57,6 +59,8 @@ public class RolesController {
         if (rol != null) {
         	model.addAttribute("titulo", "Editar Rol");
             model.addAttribute("rol", rol);
+            model.addAttribute("boton", "Actualizar");
+            model.addAttribute("modo", "edicion");
             return "formulario-rol";
         }
         return "redirect:/roles";

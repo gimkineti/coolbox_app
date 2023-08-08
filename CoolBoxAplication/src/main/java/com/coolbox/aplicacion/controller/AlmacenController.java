@@ -67,6 +67,8 @@ public class AlmacenController {
         model.addAttribute("marcas", marcasDao.listarMarcas());
         model.addAttribute("roles", rolesDao.listarRolesAlmacen());
         model.addAttribute("titulo", "Crear Nuevo Producto");
+        model.addAttribute("boton", "Registrar");
+        model.addAttribute("modo", "registro");
         return "formulario-producto-almacen";
     }
     
@@ -137,6 +139,8 @@ public class AlmacenController {
             model.addAttribute("producto", producto);
             model.addAttribute("categorias", categoriasDao.listarCategorias());
             model.addAttribute("marcas", marcasDao.listarMarcas());
+            model.addAttribute("boton", "Actualizar");
+            model.addAttribute("modo", "edicion");
 
             List<Roles> rolesAlmacen = rolesDao.listarRolesAlmacen();
             if (rolesAlmacen.isEmpty()) {
@@ -165,6 +169,8 @@ public class AlmacenController {
 	public String mostrarFormularioNuevaCategoria(Model model) {
 		model.addAttribute("categoria", new Categorias());
 		model.addAttribute("titulo", "Crear Nueva Categoria");
+        model.addAttribute("boton", "Registrar");
+        model.addAttribute("modo", "registro");
 		return "formulario-categoria-almacen";
 	}
 	
@@ -194,6 +200,8 @@ public class AlmacenController {
 		if (categoria != null) {
 			model.addAttribute("titulo", "Editar Categoria");
 			model.addAttribute("categoria", categoria);
+            model.addAttribute("boton", "Actualizar");
+            model.addAttribute("modo", "edicion");
 			return "formulario-categoria-almacen";
 		}
 		return "redirect:/almacen/categorias/listar";
@@ -210,6 +218,8 @@ public class AlmacenController {
     public String mostrarFormularioNuevaMarca(Model model) {
         model.addAttribute("marca", new Marcas());
         model.addAttribute("titulo", "Crear Nueva Marca");
+        model.addAttribute("boton", "Registrar");
+        model.addAttribute("modo", "registro");
         return "formulario-marca-almacen";
     }
 
@@ -239,6 +249,8 @@ public class AlmacenController {
         if (marca != null) {
         	model.addAttribute("titulo", "Editar Marca");
             model.addAttribute("marca", marca);
+            model.addAttribute("boton", "Actualizar");
+            model.addAttribute("modo", "edicion");
             return "formulario-marca-almacen";
         }
         return "redirect:/almacen/marcas/listar";

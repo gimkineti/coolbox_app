@@ -13,7 +13,7 @@
         <div class="d-flex justify-content-center">
             <h1 class="mt-4 mb-4" th:text="${titulo}"></h1>
         </div>
-        <a class="btn btn-warning mb-3" th:href="@{/almacen/marcas/nuevo}">Agregar Nueva Marca</a>
+        <a class="btn btn-primary mb-3" th:href="@{/almacen/marcas/nuevo}">Agregar Nueva Marca</a>
         <table class="table table-striped table-borderless">
             <thead>
                 <tr class="text-center">
@@ -27,7 +27,7 @@
                     <td class="align-middle" th:text="${marca.idMarca}"></td>
                     <td class="align-middle" th:text="${marca.nombreMarca}"></td>
                     <td>
-                        <a class="btn btn-primary mx-2 my-1"
+                        <a class="btn btn-success mx-2 my-1"
                             th:href="@{/almacen/marcas/{idMarca}/editar(idMarca=${marca.idMarca})}"
                             th:text="Editar"></a>
                     </td>

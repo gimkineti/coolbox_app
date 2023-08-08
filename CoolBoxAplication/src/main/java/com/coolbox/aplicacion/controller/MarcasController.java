@@ -28,6 +28,8 @@ public class MarcasController {
     public String mostrarFormularioNuevaMarca(Model model) {
         model.addAttribute("marca", new Marcas());
         model.addAttribute("titulo", "Crear Nueva Marca");
+        model.addAttribute("boton", "Registrar");
+        model.addAttribute("modo", "registro");
         return "formulario-marca";
     }
 
@@ -57,6 +59,8 @@ public class MarcasController {
         if (marca != null) {
         	model.addAttribute("titulo", "Editar Marca");
             model.addAttribute("marca", marca);
+            model.addAttribute("boton", "Actualizar");
+            model.addAttribute("modo", "edicion");
             return "formulario-marca";
         }
         return "redirect:/marcas/listar";

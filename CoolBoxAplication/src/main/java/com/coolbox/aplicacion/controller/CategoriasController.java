@@ -28,6 +28,8 @@ public class CategoriasController {
 	public String mostrarFormularioNuevaCategoria(Model model) {
 		model.addAttribute("categoria", new Categorias());
 		model.addAttribute("titulo", "Crear Nueva Categoria");
+		model.addAttribute("boton", "Registrar");
+		model.addAttribute("modo", "registro");
 		return "formulario-categoria";
 	}
 	
@@ -58,6 +60,8 @@ public class CategoriasController {
 		if (categoria != null) {
 			model.addAttribute("titulo", "Editar Categoria");
 			model.addAttribute("categoria", categoria);
+			model.addAttribute("boton", "Actualizar");
+			model.addAttribute("modo", "edicion");
 			return "formulario-categoria";
 		}
 		return "redirect:/categorias/listar";

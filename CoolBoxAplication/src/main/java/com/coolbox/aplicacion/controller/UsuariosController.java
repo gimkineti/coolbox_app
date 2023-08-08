@@ -44,6 +44,8 @@ public class UsuariosController {
         model.addAttribute("usuario", new Usuarios());
         model.addAttribute("roles", rolesDao.listarRoles());
         model.addAttribute("titulo", "Crear Nuevo Usuario");
+        model.addAttribute("boton", "Registrar");
+        model.addAttribute("modo", "registro");
         return "formulario-usuario";
     }
 
@@ -135,6 +137,8 @@ public class UsuariosController {
             model.addAttribute("titulo", "Editar Usuario");
             model.addAttribute("usuario", usuario);
             model.addAttribute("roles", rolesDao.listarRoles());
+            model.addAttribute("boton", "Actualizar");
+            model.addAttribute("modo", "edicion");
             return "formulario-usuario";
         }
         return "redirect:/usuarios";

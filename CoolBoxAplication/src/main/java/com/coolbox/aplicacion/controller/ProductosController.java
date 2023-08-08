@@ -76,6 +76,8 @@ public class ProductosController {
     	model.addAttribute("marcas", marcasDao.listarMarcas());
     	model.addAttribute("roles", rolesDao.listarRoles());
     	model.addAttribute("titulo", "Crear Nuevo Producto");
+        model.addAttribute("boton", "Registrar");
+        model.addAttribute("modo", "registro");
     	return "formulario-producto";
     }
 
@@ -149,6 +151,8 @@ public class ProductosController {
             model.addAttribute("categorias", categoriasDao.listarCategorias());
         	model.addAttribute("marcas", marcasDao.listarMarcas());
         	model.addAttribute("roles", rolesDao.listarRoles());
+            model.addAttribute("boton", "Actualizar");
+            model.addAttribute("modo", "edicion");
             return "formulario-producto";
         }
         return "redirect:/productos";
