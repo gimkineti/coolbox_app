@@ -25,24 +25,24 @@
             <div class="col-md-6">
                 <div class="rounded-4 shadow p-4 border border-2"
                     th:classappend="${modo == 'registro' ? 'border-primary' : 'border-success'}">
-                    <h2 style="text-decoration: underline; font-style: italic; font-size: 37px;"
-                        th:class="${modo == 'registro' ? 'text-primary text-center mb-4' : 'text-success text-center mb-4'}"
+                    <h2 style="text-decoration: underline; font-size: 37px;"
+                        th:class="${modo == 'registro' ? 'font-weight-bold font-italic text-primary text-center mb-4' : 'font-weight-bold font-italic text-success text-center mb-4'}"
                         th:text="${titulo}"></h2>
                     <form th:action="@{/almacen/marcas/guardar}" method="post" class="form container"
                         th:object="${marca}">
                         <input type="hidden" th:field="*{idMarca}" />
                         <div class="mb-3">
-                            <label for="nombreMarca" class="form-label">Nombre de la Marca:</label>
+                            <label for="nombreMarca" class="form-label font-weight-bold">Nombre de la Marca</label>
                             <input type="text" class="form-control" id="nombreMarca" th:field="*{nombreMarca}"
                                 required />
                         </div>
                         <br>
-                        <div style="margin-bottom: 5px;" class="d-grid gap-2">
-                            <button style="font-size: 20px;" type="submit"
-                                th:class="${modo == 'registro' ? 'btn btn-primary' : 'btn btn-success'}"
+                        <div class="d-grid gap-2">
+                            <button style="font-size: 17px;" type="submit"
+                                th:class="${modo == 'registro' ? 'btn btn-primary font-weight-bold' : 'btn btn-success font-weight-bold'}"
                                 th:text="${boton}"></button>
-                            <button class="btn btn-secondary" type="reset">Limpiar</button>
-                            <a th:href="@{/almacen/marcas}" class="btn btn-outline-secondary">Cancelar</a>
+                            <button style="font-size: 17px;" class="btn btn-secondary font-weight-bold" type="reset">Limpiar</button>
+                            <a style="font-size: 17px;" th:href="@{/almacen/marcas}" class="btn btn-outline-secondary font-weight-bold">Cancelar</a>
                         </div>
                     </form>
                 </div>

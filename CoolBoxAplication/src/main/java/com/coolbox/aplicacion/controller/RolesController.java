@@ -17,23 +17,23 @@ public class RolesController {
 	@Autowired
     private IRolesDao rolesDao;
 
-    @GetMapping("/roles")
+    @GetMapping("/admin/roles")
     public String listarRoles(Model model) {
         model.addAttribute("roles", rolesDao.listarRoles());
         model.addAttribute("titulo", "Crud de Roles");
-        return "listar-roles";
+        return "listar-roles-admin";
     }
 
-    @GetMapping("/roles/nuevo")
+    @GetMapping("/admin/roles/nuevo")
     public String mostrarFormularioNuevoRol(Model model) {
         model.addAttribute("rol", new Roles());
         model.addAttribute("titulo", "Crear Nuevo Rol");
         model.addAttribute("boton", "Registrar");
         model.addAttribute("modo", "registro");
-        return "formulario-rol";
+        return "formulario-rol-admin";
     }
 
-    @PostMapping("/roles/guardar")
+    @PostMapping("/admin/roles/guardar")
     public String guardarRol(@ModelAttribute("rol") Roles rol, Model model) {
     	Roles rolExistente = rolesDao.obtenerRolPorNombre(rol.getNombreRol());
     	if (rolExistente != null) {
@@ -42,18 +42,18 @@ public class RolesController {
             model.addAttribute("mensaje", mensaje);
 
             if (rol.getIdRol() != null) {
-                model.addAttribute("direccion", "/roles/" + rol.getIdRol() + "/editar");
+                model.addAttribute("direccion", "/admin/roles/" + rol.getIdRol() + "/editar");
             } else {
-                model.addAttribute("direccion", "/roles/nuevo");
+                model.addAttribute("direccion", "/admin/roles/nuevo");
             }
             return "mensaje-error";
     	} else {
     		rolesDao.guardarRol(rol);
-    		return "redirect:/roles";
+    		return "redirect:/admin/roles";
     	}
     }
 
-    @GetMapping("/roles/{idRol}/editar")
+    @GetMapping("/admin/roles/{idRol}/editar")
     public String mostrarFormularioEditarRol(@PathVariable("idRol") Long idRol, Model model) {
         Roles rol = rolesDao.obtenerRol(idRol);
         if (rol != null) {
@@ -61,14 +61,14 @@ public class RolesController {
             model.addAttribute("rol", rol);
             model.addAttribute("boton", "Actualizar");
             model.addAttribute("modo", "edicion");
-            return "formulario-rol";
+            return "formulario-rol-admin";
         }
-        return "redirect:/roles";
+        return "redirect:/admin/roles";
     }
 
-    @GetMapping("/roles/{idRol}/eliminar")
+    @GetMapping("/admin/roles/{idRol}/eliminar")
     public String eliminarRol(@PathVariable("idRol") Long idRol) {
         rolesDao.eliminarRol(idRol);
-        return "redirect:/roles";
+        return "redirect:/admin/roles";
     }
 }

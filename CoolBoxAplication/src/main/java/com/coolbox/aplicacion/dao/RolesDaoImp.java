@@ -64,5 +64,4 @@ public class RolesDaoImp implements IRolesDao {
             "SELECT r FROM Roles r WHERE r.nombreRol = 'ALMACEN'", Roles.class);
         return query.getResultList();
     }
-
 }

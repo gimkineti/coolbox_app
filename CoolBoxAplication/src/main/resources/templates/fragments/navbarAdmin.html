@@ -21,7 +21,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-customa">
     <div class="container">
-      <a class="navbar-brand" th:href="@{/login}">
+      <a class="navbar-brand" th:href="@{/admin/home}">
         <img src="/images/logo.png" alt="Logo" class="d-inline-block align-top logo-img">
       </a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
@@ -32,27 +32,27 @@
       <div class="navbar-collapse collapse justify-content-center" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/home/dashboard}">Home</a>
+            <a class="nav-link font-weight-bold" th:href="@{/admin/home}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/productos}">Productos</a>
+            <a class="nav-link font-weight-bold" th:href="@{/admin/productos}">Productos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/usuarios}">Usuarios</a>
+            <a class="nav-link font-weight-bold" th:href="@{/admin/usuarios}">Usuarios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/roles}">Roles</a>
+            <a class="nav-link font-weight-bold" th:href="@{/admin/roles}">Roles</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/marcas}">Marcas</a>
+            <a class="nav-link font-weight-bold" th:href="@{/admin/marcas}">Marcas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/categorias}">Categorias</a>
+            <a class="nav-link font-weight-bold" th:href="@{/admin/categorias}">Categorias</a>
           </li>
         </ul>
       </div>
       <div class="text-end">
-        <a th:href="@{/login}">
+        <a th:href="@{/}">
           <button type="button" class="btn btn-light">
             <strong>Cerrar Sesión</strong>
           </button>

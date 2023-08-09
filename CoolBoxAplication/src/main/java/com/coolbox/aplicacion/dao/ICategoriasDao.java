@@ -15,5 +15,4 @@ public interface ICategoriasDao {
 	void eliminarCategoria(Long idCategoria);
 	
 	Categorias obtenerCategoriaPorNombre(String nombreCategoria);
-
 }

@@ -16,9 +16,7 @@
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" 
     crossorigin="anonymous">
     </script>
-  <link rel="stylesheet" href="/css/forms.css">
 </head>
-
 <body class="bg-light">
   <section th:replace="~{./fragments/navbar}"></section>
   <div class="container py-5">
@@ -26,8 +24,8 @@
       <div class="col-md-6">
         <div class="bg-white rounded-4 shadow p-4 border border-2 border-primary">
           <h2 style="text-decoration: underline; font-size: 37px; color: #0d6efd;"
-            class="text-center mb-4 font-weight-bold font-italic">Inicio de sesión</h2>
-          <form th:action="@{/login}" method="post" class="needs-validation" novalidate>
+            class="text-center mb-4 font-weight-bold font-italic">Inicio de Sesión</h2>
+          <form th:action="@{/}" method="post" class="needs-validation" novalidate>
             <div class="mb-3">
               <label for="nombreUsuario" class="font-weight-bold form-label">Usuario</label>
               <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" required>
@@ -37,9 +35,9 @@
               <input type="password" class="form-control" id="passwordUsuario" name="passwordUsuario" required>
             </div>
             <br>
-            <div style="margin-bottom: 5px;" class="d-grid gap-2">
-              <button type="submit" class="font-weight-bold btn btn-primary">Iniciar Sesión</button>
-              <button class=" font-weight-bold btn btn-secondary" type="reset">Limpiar</button>
+            <div class="d-grid gap-2">
+              <button style="font-size: 17px;" type="submit" class="font-weight-bold btn btn-primary">Iniciar Sesión</button>
+              <button style="font-size: 17px;" class=" font-weight-bold btn btn-secondary" type="reset">Limpiar</button>
             </div>
           </form>
         </div>

@@ -21,7 +21,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-customn">
     <div class="container">
-      <a class="navbar-brand" th:href="@{/login}">
+      <a class="navbar-brand" th:href="@{/home/almacen}">
         <img src="/images/logo.png" alt="Logo" class="d-inline-block align-top logo-img" />
       </a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
@@ -32,21 +32,21 @@
       <div class="navbar-collapse collapse justify-content-center" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/home/almacen}">Home</a>
+            <a class="nav-link font-weight-bold" th:href="@{/home/almacen}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/almacen/productos}">Productos</a>
+            <a class="nav-link font-weight-bold" th:href="@{/almacen/productos}">Productos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/almacen/marcas}">Marcas</a>
+            <a class="nav-link font-weight-bold" th:href="@{/almacen/marcas}">Marcas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/almacen/categorias}">Categorías</a>
+            <a class="nav-link font-weight-bold" th:href="@{/almacen/categorias}">Categorías</a>
           </li>
         </ul>
       </div>
       <div class="text-end">
-        <a th:href="@{/login}">
+        <a th:href="@{/}">
           <button type="button" class="btn btn-light">
             <strong>Cerrar Sesión</strong>
           </button>

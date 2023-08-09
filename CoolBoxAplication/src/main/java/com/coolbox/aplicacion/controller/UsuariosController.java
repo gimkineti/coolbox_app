@@ -26,7 +26,7 @@ public class UsuariosController {
     @Autowired
     private IRolesDao rolesDao;
 
-    @GetMapping("/usuarios")
+    @GetMapping("/admin/usuarios")
     public String listarUsuarios(Model model) {
         List<Usuarios> usuarios = usuarioDao.listarUsuarios();
 
@@ -36,35 +36,31 @@ public class UsuariosController {
 
         model.addAttribute("usuarios", usuarios);
         model.addAttribute("titulo", "Crud de Usuarios");
-        return "listar-usuarios";
+        return "listar-usuarios-admin";
     }
 
-    @GetMapping("/usuarios/nuevo")
+    @GetMapping("/admin/usuarios/nuevo")
     public String mostrarFormularioNuevoUsuario(Model model) {
         model.addAttribute("usuario", new Usuarios());
         model.addAttribute("roles", rolesDao.listarRoles());
         model.addAttribute("titulo", "Crear Nuevo Usuario");
         model.addAttribute("boton", "Registrar");
         model.addAttribute("modo", "registro");
-        return "formulario-usuario";
+        return "formulario-usuario-admin";
     }
 
-    @PostMapping(value = "/usuarios/guardar")
+    @PostMapping(value = "/admin/usuarios/guardar")
     public String guardarUsuario(@ModelAttribute("usuario") @Valid Usuarios usuario, BindingResult result,
                                 Model model) {
-        // Verificar si hay errores de validación en el formulario
         if (result.hasErrors()) {
             model.addAttribute("titulo", "Formulario de Usuario");
             model.addAttribute("roles", rolesDao.listarRoles());
-            return "formulario-usuario";
+            return "formulario-usuario-admin";
         }
 
         try {
             Roles rol = rolesDao.obtenerRol(usuario.getRolUsuario().getIdRol());
-
-            // Verificar si es un usuario nuevo o un usuario existente
             if (usuario.getIdUsuario() == null) {
-                // Es un nuevo usuario, verificar si ya existe por nombre o email
                 Usuarios usuarioExistentePorNombre = usuarioDao.obtenerUsuarioPorNombre(usuario.getNombreUsuario());
                 Usuarios usuarioExistentePorEmail = usuarioDao.obtenerUsuarioPorEmail(usuario.getEmailUsuario());
 
@@ -72,26 +68,25 @@ public class UsuariosController {
                     String mensaje = "El usuario y el email ya existen";
                     model.addAttribute("titulo", "Error");
                     model.addAttribute("mensaje", mensaje);
-                    model.addAttribute("direccion", "/usuarios/nuevo");
+                    model.addAttribute("direccion", "/admin/usuarios/nuevo");
                     return "mensaje-error";
                 } else if (usuarioExistentePorNombre != null) {
                     String mensaje = "El usuario ya existe";
                     model.addAttribute("titulo", "Error");
                     model.addAttribute("mensaje", mensaje);
-                    model.addAttribute("direccion", "/usuarios/nuevo");
+                    model.addAttribute("direccion", "/admin/usuarios/nuevo");
                     return "mensaje-error";
                 } else if (usuarioExistentePorEmail != null) {
                     String mensaje = "El email ya existe";
                     model.addAttribute("titulo", "Error");
                     model.addAttribute("mensaje", mensaje);
-                    model.addAttribute("direccion", "/usuarios/nuevo");
+                    model.addAttribute("direccion", "/admin/usuarios/nuevo");
                     return "mensaje-error";
                 }
 
                 usuario.setRolUsuario(rol);
                 usuarioDao.guardarUsuario(usuario);
             } else {
-                // Es un usuario existente, verificar si ya existe por nombre o email
                 Usuarios usuarioExistentePorNombre = usuarioDao.obtenerUsuarioPorNombre(usuario.getNombreUsuario());
                 Usuarios usuarioExistentePorEmail = usuarioDao.obtenerUsuarioPorEmail(usuario.getEmailUsuario());
 
@@ -99,19 +94,19 @@ public class UsuariosController {
                     String mensaje = "El usuario y el email ya existe";
                     model.addAttribute("titulo", "Error");
                     model.addAttribute("mensaje", mensaje);
-                    model.addAttribute("direccion", "/usuarios/" + usuario.getIdUsuario() + "/editar");
+                    model.addAttribute("direccion", "/admin/usuarios/" + usuario.getIdUsuario() + "/editar");
                     return "mensaje-error";
                 } else if (usuarioExistentePorNombre != null) {
                     String mensaje = "El usuario ya existe";
                     model.addAttribute("titulo", "Error");
                     model.addAttribute("mensaje", mensaje);
-                    model.addAttribute("direccion", "/usuarios/" + usuario.getIdUsuario() + "/editar");
+                    model.addAttribute("direccion", "/admin/usuarios/" + usuario.getIdUsuario() + "/editar");
                     return "mensaje-error";
                 } else if (usuarioExistentePorEmail != null) {
                     String mensaje = "El email ya existe";
                     model.addAttribute("titulo", "Error");
                     model.addAttribute("mensaje", mensaje);
-                    model.addAttribute("direccion", "/usuarios/" + usuario.getIdUsuario() + "/editar");
+                    model.addAttribute("direccion", "/admin/usuarios/" + usuario.getIdUsuario() + "/editar");
                     return "mensaje-error";
                 }
 
@@ -119,18 +114,18 @@ public class UsuariosController {
                 usuarioDao.guardarUsuario(usuario);
             }
 
-            return "redirect:/usuarios";
+            return "redirect:/admin/usuarios";
         } catch (Exception e) {
             String mensaje = "Error al guardar el usuario: " + e.getMessage();
             model.addAttribute("titulo", "Error");
             model.addAttribute("mensaje", mensaje);
-            model.addAttribute("direccion", "/usuarios/nuevo");
+            model.addAttribute("direccion", "/admin/usuarios/nuevo");
             return "mensaje-error";
         }
     }
 
 
-    @GetMapping(value = "/usuarios/{idUsuario}/editar")
+    @GetMapping(value = "/admin/usuarios/{idUsuario}/editar")
     public String mostrarFormularioEditarUsuario(@PathVariable("idUsuario") Long idUsuario, Model model) {
         Usuarios usuario = usuarioDao.obtenerUsuario(idUsuario);
         if (usuario != null) {
@@ -139,14 +134,14 @@ public class UsuariosController {
             model.addAttribute("roles", rolesDao.listarRoles());
             model.addAttribute("boton", "Actualizar");
             model.addAttribute("modo", "edicion");
-            return "formulario-usuario";
+            return "formulario-usuario-admin";
         }
-        return "redirect:/usuarios";
+        return "redirect:/admin/usuarios";
     }
 
-    @GetMapping(value = "usuarios/{idUsuario}/eliminar")
+    @GetMapping(value = "/admin/usuarios/{idUsuario}/eliminar")
     public String eliminarUsuario(@PathVariable(value = "idUsuario") Long idUsuario) {
         usuarioDao.eliminarUsuario(idUsuario);
-        return "redirect:/usuarios";
+        return "redirect:/admin/usuarios";
     }
 }

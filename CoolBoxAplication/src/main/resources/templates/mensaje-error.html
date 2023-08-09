@@ -19,10 +19,10 @@
 </head>
 <body>
     <section th:replace="~{./fragments/navbar}"></section>
-    <div class="container text-center mt-5 p-4 bg-light rounded-5 shadow border border-danger border-2 mx-auto col-md-4">
-        <h1 th:text="${titulo}" class="mb-3"></h1>
-        <h3 th:text="${mensaje}" class="mb-4"></h3>
-        <a th:href="${direccion}" class="btn btn-danger btn-lg">Volver</a>
+    <div class="container text-center mt-5 p-4 bg-light rounded-4 shadow border border-danger border-2 mx-auto col-md-4">
+        <h1 th:text="${titulo}" class="font-weight-bold font-italic mb-3"></h1>
+        <h3 th:text="${mensaje}" class="font-weight-normal mb-4"></h3>
+        <a th:href="${direccion}" class="font-weight-bold btn btn-danger btn-lg">Volver</a>
     </div>
     <br>
     <section th:replace="~{./fragments/footer}"></section>

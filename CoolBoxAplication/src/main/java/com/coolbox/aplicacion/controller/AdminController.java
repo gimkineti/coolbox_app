@@ -5,9 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class DashboardController {
-	@RequestMapping("/home/dashboard")
+public class AdminController {
+	@RequestMapping("/admin/home")
 	public String home(Model m) {
-		return "dashboard";
+		return "admin";
 	}
 }

@@ -9,5 +9,4 @@ public class CoolBoxAplicactionApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CoolBoxAplicactionApplication.class, args);
 	}
-
 }

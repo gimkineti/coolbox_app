@@ -105,7 +105,6 @@ public class AlmacenController {
                 producto.setFechaProducto(fecha);
                 productosDao.guardarProducto(producto);
             } else {
-                // Es un producto existente, verificar si la descripción ya existe para otro producto
                 Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
                 if (descripcionExistente != null) {
                     String mensaje = "La descripción ya existe";
@@ -184,7 +183,6 @@ public class AlmacenController {
             if (categoria.getIdCategoria() != null) {
 				model.addAttribute("direccion", "/almacen/categorias/" + categoria.getIdCategoria() + "/editar");
 			} else {
-				// Si el idCategoria es nulo, significa que es una nueva categoría, así que volvemos al formulario para agregar una nueva categoría
 				model.addAttribute("direccion", "/almacen/categorias/nuevo");
 			}
 			return "mensaje-error";

@@ -17,44 +17,42 @@ public class CategoriasController {
 	@Autowired
 	private ICategoriasDao categoriaDao;
 	
-	@GetMapping(value = "/categorias")
+	@GetMapping(value = "/admin/categorias")
 	public String listarCategorias(Model model) {
 		model.addAttribute("categorias", categoriaDao.listarCategorias());
 		model.addAttribute("titulo", "Crud de Categorias");
-		return "listar-categorias";
+		return "listar-categorias-admin";
 	}
 	
-	@GetMapping(value = "/categorias/nuevo")
+	@GetMapping(value = "/admin/categorias/nuevo")
 	public String mostrarFormularioNuevaCategoria(Model model) {
 		model.addAttribute("categoria", new Categorias());
 		model.addAttribute("titulo", "Crear Nueva Categoria");
 		model.addAttribute("boton", "Registrar");
 		model.addAttribute("modo", "registro");
-		return "formulario-categoria";
+		return "formulario-categoria-admin";
 	}
 	
-	@PostMapping(value = "/categorias/guardar")
+	@PostMapping(value = "/admin/categorias/guardar")
 	public String guardarCategoria(@ModelAttribute("categoria") Categorias categoria, Model model) {
 		Categorias categoriaExistente = categoriaDao.obtenerCategoriaPorNombre(categoria.getNombreCategoria());
 		if (categoriaExistente != null) {
 			String mensaje = "La categoria ya existe";
 			model.addAttribute("titulo", "Error");
 			model.addAttribute("mensaje", mensaje);
-			// Guardamos el ID de la categoría para redireccionar al formulario de edición
 			if (categoria.getIdCategoria() != null) {
-				model.addAttribute("direccion", "/categorias/" + categoria.getIdCategoria() + "/editar");
+				model.addAttribute("direccion", "/admin/categorias/" + categoria.getIdCategoria() + "/editar");
 			} else {
-				// Si el idCategoria es nulo, significa que es una nueva categoría, así que volvemos al formulario para agregar una nueva categoría
-				model.addAttribute("direccion", "/categorias/nuevo");
+				model.addAttribute("direccion", "/admin/categorias/nuevo");
 			}
 			return "mensaje-error";
 		} else {
 			categoriaDao.guardarCategoria(categoria);
-			return "redirect:/categorias";
+			return "redirect:/admin/categorias";
 		}
 	}
 	
-	@GetMapping(value = "/categorias/{idCategoria}/editar")
+	@GetMapping(value = "/admin/categorias/{idCategoria}/editar")
 	public String mostrarFormularioEditarCategoria(@PathVariable("idCategoria") Long idCategoria, Model model) {
 		Categorias categoria = categoriaDao.obtenerCategoria(idCategoria);
 		if (categoria != null) {
@@ -62,14 +60,14 @@ public class CategoriasController {
 			model.addAttribute("categoria", categoria);
 			model.addAttribute("boton", "Actualizar");
 			model.addAttribute("modo", "edicion");
-			return "formulario-categoria";
+			return "formulario-categoria-admin";
 		}
-		return "redirect:/categorias/listar";
+		return "redirect:/admin/categorias";
 	}
 	
-	@GetMapping(value = "/categorias/{idCategoria}/eliminar")
+	@GetMapping(value = "/admin/categorias/{idCategoria}/eliminar")
 	public String eliminarCategoria(@PathVariable("idCategoria") Long idCategoria) {
 		categoriaDao.eliminarCategoria(idCategoria);
-		return "redirect:/categorias";
+		return "redirect:/admin/categorias";
 	}
 }

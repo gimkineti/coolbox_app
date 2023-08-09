@@ -54,7 +54,7 @@ public class ProductosController {
     @Autowired
     private ExcelGenerator excelGenerator;
 
-    @GetMapping("/productos")
+    @GetMapping("/admin/productos")
     public String listarProductos(Model model) {
     	List<Productos> productos = productosDao.listarProductos();
     	
@@ -66,10 +66,10 @@ public class ProductosController {
     	
         model.addAttribute("productos", productos);
         model.addAttribute("titulo", "Crud de Productos");
-        return "listar-productos";
+        return "listar-productos-admin";
     }
 
-    @GetMapping("/productos/nuevo")
+    @GetMapping("/admin/productos/nuevo")
     public String mostrarFormularioNuevoProducto(Model model) {
     	model.addAttribute("producto", new Productos());
     	model.addAttribute("categorias", categoriasDao.listarCategorias());
@@ -78,10 +78,10 @@ public class ProductosController {
     	model.addAttribute("titulo", "Crear Nuevo Producto");
         model.addAttribute("boton", "Registrar");
         model.addAttribute("modo", "registro");
-    	return "formulario-producto";
+    	return "formulario-producto-admin";
     }
 
-    @PostMapping("/productos/guardar")
+    @PostMapping("/admin/productos/guardar")
     public String guardarProducto(@ModelAttribute("producto") @Valid Productos producto, BindingResult result,
                                 @RequestParam("fechaProducto") @DateTimeFormat(pattern = "yyyy-MM-dd") String fechaProducto,
                                 Model model) {
@@ -90,23 +90,21 @@ public class ProductosController {
             model.addAttribute("categorias", categoriasDao.listarCategorias());
             model.addAttribute("marcas", marcasDao.listarMarcas());
             model.addAttribute("roles", rolesDao.listarRoles());
-            return "formulario-producto";
+            return "formulario-producto-admin";
         }
 
         try {
             Marcas marca = marcasDao.obtenerMarca(producto.getMarcaProducto().getIdMarca());
             Categorias categoria = categoriasDao.obtenerCategoria(producto.getCategoriaProducto().getIdCategoria());
             Roles rol = rolesDao.obtenerRol(producto.getRolProducto().getIdRol());
-            // Verificar si es un producto nuevo o un producto existente
             if (producto.getIdProducto() == null) {
-                // Es un nuevo producto, verificar si ya existe por descripción
                 Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
 
                 if (descripcionExistente != null) {
                     String mensaje = "La descripción ya existe";
                     model.addAttribute("titulo", "Error");
                     model.addAttribute("mensaje", mensaje);
-                    model.addAttribute("direccion", "/productos/nuevo");
+                    model.addAttribute("direccion", "/admin/productos/nuevo");
                     return "mensaje-error";
                 }
                 producto.setCategoriaProducto(categoria);
@@ -116,13 +114,12 @@ public class ProductosController {
                 producto.setFechaProducto(fecha);
                 productosDao.guardarProducto(producto);
             } else {
-                // Es un producto existente, verificar si la descripción ya existe para otro producto
                 Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
                 if (descripcionExistente != null) {
                     String mensaje = "La descripción ya existe";
                     model.addAttribute("titulo", "Error");
                     model.addAttribute("mensaje", mensaje);
-                    model.addAttribute("direccion", "/productos/" + producto.getIdProducto() + "/editar");
+                    model.addAttribute("direccion", "/admin/productos/" + producto.getIdProducto() + "/editar");
                     return "mensaje-error";
                 }
                 producto.setCategoriaProducto(categoria);
@@ -132,17 +129,17 @@ public class ProductosController {
                 producto.setFechaProducto(fecha);
                 productosDao.guardarProducto(producto);
             }
-            return "redirect:/productos";
+            return "redirect:/admin/productos";
         } catch (Exception e) {
             String mensaje = "Error al guardar el producto: " + e.getMessage();
             model.addAttribute("titulo", "Error");
             model.addAttribute("mensaje", mensaje);
-            model.addAttribute("direccion", "/productos/nuevo");
+            model.addAttribute("direccion", "/admin/productos/nuevo");
             return "mensaje-error";
         }
     }
 
-    @GetMapping("/productos/{idProducto}/editar")
+    @GetMapping("/admin/productos/{idProducto}/editar")
     public String mostrarFormularioEditarProducto(@PathVariable("idProducto") Long idProducto, Model model) {
         Productos producto = productosDao.obtenerProducto(idProducto);
         if (producto != null) {
@@ -153,49 +150,38 @@ public class ProductosController {
         	model.addAttribute("roles", rolesDao.listarRoles());
             model.addAttribute("boton", "Actualizar");
             model.addAttribute("modo", "edicion");
-            return "formulario-producto";
+            return "formulario-producto-admin";
         }
-        return "redirect:/productos";
+        return "redirect:/admin/productos";
     }
 
-    @GetMapping("/productos/{idProducto}/eliminar")
+    @GetMapping("/admin/productos/{idProducto}/eliminar")
     public String eliminarProducto(@PathVariable("idProducto") Long idProducto) {
         productosDao.eliminarProducto(idProducto);
-        return "redirect:/productos";
+        return "redirect:/admin/productos";
     }
 
-    @GetMapping("/productos/exportar-pdf")
+    @GetMapping("/admin/productos/exportar-pdf")
     public ResponseEntity<byte[]> exportarPdf() {
         List<Productos> listaProductos = productosDao.listarProductos();
-
-        // Generar el informe PDF utilizando el PdfGenerator
         ByteArrayInputStream pdfBytesStream = pdfGenerator.generatePdf(listaProductos);
         byte[] pdfBytes = pdfBytesStream.readAllBytes();
-
-        // Crear el encabezado y enviar el PDF como respuesta para descarga
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
-        headers.setContentDispositionFormData("attachment", "productos.pdf"); // Nombre del archivo a descargar
+        headers.setContentDispositionFormData("attachment", "productos.pdf");
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-
         return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
     }
 
-    @GetMapping("/productos/exportar-excel")
+    @GetMapping("/admin/productos/exportar-excel")
     public ResponseEntity<byte[]> exportarExcel() {
         List<Productos> listaProductos = productosDao.listarProductos();
-
-        // Generar el informe Excel utilizando el ExcelGenerator
         ByteArrayInputStream excelBytesStream = excelGenerator.generateExcel(listaProductos);
         byte[] excelBytes = excelBytesStream.readAllBytes();
-
-        // Crear el encabezado y enviar el Excel como respuesta para descarga
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        headers.setContentDispositionFormData("attachment", "productos.xlsx"); // Nombre del archivo a descargar
+        headers.setContentDispositionFormData("attachment", "productos.xlsx");
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-
         return new ResponseEntity<>(excelBytes, headers, HttpStatus.OK);
     }
-
 }

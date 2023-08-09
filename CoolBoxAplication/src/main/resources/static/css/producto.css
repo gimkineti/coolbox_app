@@ -1,11 +1,22 @@
-.table thead th {
-    background-color: SteelBlue;
-    color: #fff;
-    vertical-align: middle;
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.table tbody td {
-    vertical-align: middle;
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #00BCD4;
+    color: white;
+}
+
+tr:nth-child(odd) {
+    background-color: #E0F7FA;
 }
 .btn-export {
     display: inline-block;

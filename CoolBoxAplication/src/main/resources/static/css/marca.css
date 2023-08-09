@@ -1,4 +1,20 @@
-.table thead th {
-    background-color: #cc0066;
-    color: #fff;
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #44546A;
+    color: white;
+}
+
+tr:nth-child(odd) {
+    background-color: #D6DCE4;
 }

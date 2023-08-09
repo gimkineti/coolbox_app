@@ -27,7 +27,7 @@ public class Usuarios implements Serializable {
     private Roles rolUsuario;
 
     @Transient
-    private String nombreRol; // Nuevo campo para mostrar el nombre del rol en lugar del ID
+    private String nombreRol;
 
     @Column(name = "nombre_usuario")
     private String nombreUsuario;
@@ -102,10 +102,3 @@ public class Usuarios implements Serializable {
         return serialVersionUID;
     }
 }
-
-
-
-
-
-
-
