@@ -15,7 +15,7 @@ public class TableHeaderEvent extends PdfPageEventHelper {
     @Override
     public void onEndPage(PdfWriter writer, Document document) {
         if (table != null) {
-            table.writeSelectedRows(0, -1, document.leftMargin(), document.top(), writer.getDirectContent());
+            table.writeSelectedRows(0, -1, document.leftMargin(), document.top() + 10, writer.getDirectContent());
         }
     }
 }

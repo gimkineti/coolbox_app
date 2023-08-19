@@ -20,7 +20,7 @@ public class RolesDaoImp implements IRolesDao {
     @Override
     @Transactional
     public List<Roles> listarRoles() {
-        return entityManager.createQuery("SELECT r FROM Roles r", Roles.class)
+        return entityManager.createQuery("SELECT r FROM Roles r ORDER BY r.idRol", Roles.class)
                 .getResultList();
     }
 

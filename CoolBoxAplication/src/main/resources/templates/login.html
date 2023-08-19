@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login de Usuario</title>
+  <link rel="icon" href="/images/icon.png">
   <link 
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
     rel="stylesheet"
@@ -15,7 +16,7 @@
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" 
     crossorigin="anonymous">
-    </script>
+  </script>
 </head>
 <body class="bg-light">
   <section th:replace="~{./fragments/navbar}"></section>
@@ -28,7 +29,7 @@
           <form th:action="@{/}" method="post" class="needs-validation" novalidate>
             <div class="mb-3">
               <label for="nombreUsuario" class="font-weight-bold form-label">Usuario</label>
-              <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" required>
+              <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" required autofocus>
             </div>
             <div class="mb-3">
               <label for="passwordUsuario" class="font-weight-bold form-label">Contraseña</label>

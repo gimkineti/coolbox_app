@@ -16,11 +16,15 @@ public class PdfGenerator {
     
     public ByteArrayInputStream generatePdf(List<Productos> productosList) {
         Document document = new Document(PageSize.A4.rotate());
-        document.setMargins(30, 30, 0, 30);
+        document.setMargins(30, 30, 10, 30);
+        
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         try {
-            PdfWriter.getInstance(document, out);
+            PdfWriter writer = PdfWriter.getInstance(document, out); // Colocar aquí la declaración de 'writer'
+            TableHeaderEvent event = new TableHeaderEvent();
+            writer.setPageEvent(event);
+
             document.open();
 
             Font titleFont = new Font(Font.FontFamily.HELVETICA, 25, Font.BOLD, new BaseColor(139, 0, 0));
@@ -46,7 +50,7 @@ public class PdfGenerator {
     private void addTableHeader(PdfPTable table) {
         Font headerFont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.WHITE);
         Stream.of("ID del Producto", "Descripción del Producto", "Stock del Producto", "Marca del Producto",
-                "Categoría del Producto", "Precio de Venta", "Fecha de Ingreso")
+                  "Categoría del Producto", "Precio de Venta", "Fecha de Ingreso")
                 .forEach(columnTitle -> {
                     PdfPCell header = new PdfPCell();
                     header.setBackgroundColor(new BaseColor(0, 112, 192));
@@ -58,7 +62,10 @@ public class PdfGenerator {
                     header.setPhrase(new Phrase(columnTitle, headerFont));
                     table.addCell(header);
                 });
-    }
+    
+        table.setHeaderRows(1); // Esto permite que el encabezado se repita en cada página
+        table.setSpacingBefore(20); // Ajusta el espacio entre el encabezado y la tabla
+    }    
 
     private void addRows(PdfPTable table, List<Productos> productosList) {
         Font contentFont = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL, BaseColor.BLACK);

@@ -19,15 +19,16 @@ public class ProductosDaoImp implements IProductosDao{
     private EntityManager entityManager;
 
 	@Override
-	@Transactional(readOnly = true)
-	public List<Productos> listarProductos() {
-	    TypedQuery<Productos> query = entityManager.createQuery(
-	        "SELECT p FROM Productos p " +
-	        "JOIN FETCH p.categoriaProducto " +
-	        "JOIN FETCH p.marcaProducto " +
-	        "JOIN FETCH p.rolProducto", Productos.class);
-	    return query.getResultList();
-	}
+    @Transactional(readOnly = true)
+    public List<Productos> listarProductos() {
+        TypedQuery<Productos> query = entityManager.createQuery(
+            "SELECT p FROM Productos p " +
+            "JOIN FETCH p.categoriaProducto " +
+            "JOIN FETCH p.marcaProducto " +
+            "JOIN FETCH p.rolProducto " +
+            "ORDER BY p.idProducto", Productos.class);
+        return query.getResultList();
+    }
 
     @Override
     @Transactional

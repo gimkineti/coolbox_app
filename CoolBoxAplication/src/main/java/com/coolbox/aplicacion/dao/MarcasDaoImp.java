@@ -18,7 +18,7 @@ public class MarcasDaoImp implements IMarcasDao {
 	@Override
     @Transactional
     public List<Marcas> listarMarcas() {
-        return entityManager.createQuery("SELECT m FROM Marcas m", Marcas.class)
+        return entityManager.createQuery("SELECT m FROM Marcas m ORDER BY m.idMarca", Marcas.class)
                 .getResultList();
     }
 

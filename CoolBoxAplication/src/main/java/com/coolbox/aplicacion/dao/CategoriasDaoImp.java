@@ -19,7 +19,8 @@ public class CategoriasDaoImp implements ICategoriasDao {
     @Override
     @Transactional(readOnly = true)
     public List<Categorias> listarCategorias() {
-        return entityManager.createQuery("SELECT c FROM Categorias c", Categorias.class).getResultList();
+        return entityManager.createQuery("SELECT c FROM Categorias c ORDER BY c.idCategoria", Categorias.class)
+                .getResultList();
     }
 
     @Override

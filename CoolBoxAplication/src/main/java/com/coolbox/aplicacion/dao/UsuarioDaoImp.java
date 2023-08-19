@@ -20,11 +20,13 @@ public class UsuarioDaoImp implements IUsuarioDao {
 	
 	@Override
     @Transactional(readOnly = true)
-	public List<Usuarios> listarUsuarios() {
+    public List<Usuarios> listarUsuarios() {
         TypedQuery<Usuarios> query = entityManager.createQuery(
-                "SELECT u FROM Usuarios u JOIN FETCH u.rolUsuario", Usuarios.class);
+            "SELECT u FROM Usuarios u JOIN FETCH u.rolUsuario " +
+            "ORDER BY u.idUsuario", Usuarios.class); // Agregado ORDER BY idUsuario
         return query.getResultList();
     }
+
 	
 	@Override
 	@Transactional
