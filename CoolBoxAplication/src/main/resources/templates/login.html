@@ -1,48 +1,41 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login de Usuario</title>
   <link rel="icon" href="/images/icon.png">
-  <link 
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
-    rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-  <script 
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" 
-    crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
+        rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+        crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" 
+          crossorigin="anonymous">
   </script>
 </head>
-<body class="bg-light">
+<body class="bg-body-secondary">
   <section th:replace="~{./fragments/navbar}"></section>
-  <div class="container py-5">
+  <div class="container py-4">
     <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="bg-white rounded-4 shadow p-4 border border-2 border-primary">
-          <h2 style="text-decoration: underline; font-size: 37px; color: #0d6efd;"
-            class="text-center mb-4 font-weight-bold font-italic">Inicio de Sesión</h2>
-          <form th:action="@{/}" method="post" class="needs-validation" novalidate>
-            <div class="mb-3">
-              <label for="nombreUsuario" class="font-weight-bold form-label">Usuario</label>
-              <input type="text" class="form-control" id="nombreUsuario" name="nombreUsuario" required autofocus>
-            </div>
-            <div class="mb-3">
-              <label for="passwordUsuario" class="font-weight-bold form-label">Contraseña</label>
-              <input type="password" class="form-control" id="passwordUsuario" name="passwordUsuario" required>
-            </div>
-            <br>
-            <div class="d-grid gap-2">
-              <button style="font-size: 17px;" type="submit" class="font-weight-bold btn btn-primary">Iniciar Sesión</button>
-              <button style="font-size: 17px;" class=" font-weight-bold btn btn-secondary" type="reset">Limpiar</button>
-            </div>
-          </form>
+        <div class="col-md-5 py-3 px-4 border border-primary shadow-lg border-3 rounded-4">
+            <h2 class="text-center mb-4 fw-bold fs-2 fst-italic text-decoration-underline">Inicio de Sesión</h2>
+            <form th:action="@{/}" method="post" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="nombreUsuario" class="fw-bold form-label">Usuario</label>
+                    <input type="text" class="text-uppercase fw-medium form-control" id="nombreUsuario"  name="nombreUsuario" required autofocus>
+                </div>
+                <div class="mb-3">
+                    <label for="passwordUsuario" class="fw-bold form-label">Contraseña</label>
+                    <input type="password" class="text-uppercase fw-medium form-control" id="passwordUsuario" name="passwordUsuario" required>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="fw-bold fs-6 btn btn-primary">Ingresar</button>
+                    <button type="reset" class="fw-bold fs-6 btn btn-secondary">Limpiar</button>
+                </div>
+            </form>
         </div>
-      </div>
     </div>
   </div>
   <section th:replace="~{./fragments/footer}"></section>

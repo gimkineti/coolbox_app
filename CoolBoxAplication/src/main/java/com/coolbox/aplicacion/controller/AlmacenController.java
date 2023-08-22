@@ -40,7 +40,7 @@ public class AlmacenController {
     @Autowired
     private IRolesDao rolesDao;
     
-    @GetMapping(value="/home/almacen")
+    @GetMapping(value="/almacen/home")
     public String home(Model m){
         return "almacen";
     }
@@ -74,45 +74,48 @@ public class AlmacenController {
     
     @PostMapping("/almacen/productos/guardar")
     public String guardarProducto(@ModelAttribute("producto") @Valid Productos producto, BindingResult result,
-                                  @RequestParam("fechaProducto") @DateTimeFormat(pattern = "yyyy-MM-dd") String fechaProducto,
-                                  Model model) {
+                                @RequestParam("fechaProducto") @DateTimeFormat(pattern = "yyyy-MM-dd") String fechaProducto,
+                                Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("titulo", "Agregar Producto");
+            model.addAttribute("titulo", "Formulario de Producto");
             model.addAttribute("categorias", categoriasDao.listarCategorias());
             model.addAttribute("marcas", marcasDao.listarMarcas());
             return "formulario-producto-almacen";
         }
 
         try {
-            Categorias categoria = categoriasDao.obtenerCategoria(producto.getCategoriaProducto().getIdCategoria());
             Marcas marca = marcasDao.obtenerMarca(producto.getMarcaProducto().getIdMarca());
+            Categorias categoria = categoriasDao.obtenerCategoria(producto.getCategoriaProducto().getIdCategoria());
             Roles rol = rolesDao.obtenerRolPorNombre("ALMACEN");
 
-            if (producto.getIdProducto() == null) {
-                Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
+            Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
 
+            if (producto.getIdProducto() == null) { // Nuevo producto
                 if (descripcionExistente != null) {
-                    String mensaje = "La descripción ya existe";
+                    String mensaje = "El producto ya existe";
                     model.addAttribute("titulo", "Error");
                     model.addAttribute("mensaje", mensaje);
                     model.addAttribute("direccion", "/almacen/productos/nuevo");
                     return "mensaje-error";
                 }
+
+                // Lógica para guardar el nuevo producto
                 producto.setCategoriaProducto(categoria);
                 producto.setMarcaProducto(marca);
                 producto.setRolProducto(rol);
                 java.sql.Date fecha = java.sql.Date.valueOf(fechaProducto);
                 producto.setFechaProducto(fecha);
                 productosDao.guardarProducto(producto);
-            } else {
-                Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
-                if (descripcionExistente != null) {
-                    String mensaje = "La descripción ya existe";
+            } else { // Producto existente
+                if (descripcionExistente != null && !descripcionExistente.getIdProducto().equals(producto.getIdProducto())) {
+                    String mensaje = "El producto ya existe";
                     model.addAttribute("titulo", "Error");
                     model.addAttribute("mensaje", mensaje);
                     model.addAttribute("direccion", "/almacen/productos/" + producto.getIdProducto() + "/editar");
                     return "mensaje-error";
                 }
+
+                // Lógica para actualizar el producto
                 producto.setCategoriaProducto(categoria);
                 producto.setMarcaProducto(marca);
                 producto.setRolProducto(rol);
@@ -120,6 +123,7 @@ public class AlmacenController {
                 producto.setFechaProducto(fecha);
                 productosDao.guardarProducto(producto);
             }
+
             return "redirect:/almacen/productos";
         } catch (Exception e) {
             String mensaje = "Error al guardar el producto: " + e.getMessage();
@@ -176,7 +180,7 @@ public class AlmacenController {
 	@PostMapping(value = "/almacen/categorias/guardar")
 	public String guardarCategoria(@ModelAttribute("categoria") Categorias categoria, Model model) {
 		Categorias categoriaExistente = categoriasDao.obtenerCategoriaPorNombre(categoria.getNombreCategoria());
-		if (categoriaExistente != null) {
+		if (categoriaExistente != null && !categoriaExistente.getIdCategoria().equals(categoria.getIdCategoria())) {
 			String mensaje = "La categoria ya existe";
             model.addAttribute("titulo", "Error");
             model.addAttribute("mensaje", mensaje);
@@ -224,7 +228,7 @@ public class AlmacenController {
     @PostMapping("/almacen/marcas/guardar")
     public String guardarMarca(@ModelAttribute("marca") Marcas marca, Model model) {
         Marcas marcaExistente = marcasDao.obtenerMarcaPorNombre(marca.getNombreMarca());
-        if (marcaExistente != null) {
+        if (marcaExistente != null && !marcaExistente.getIdMarca().equals(marca.getIdMarca())) {
             String mensaje = "La marca ya existe";
             model.addAttribute("titulo", "Error");
             model.addAttribute("mensaje", mensaje);

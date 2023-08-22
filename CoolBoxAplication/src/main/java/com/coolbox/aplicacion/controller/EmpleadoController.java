@@ -25,7 +25,7 @@ public class EmpleadoController {
     private IProductosDao productosDao;
     
 
-    @GetMapping(value="/home/empleado")
+    @GetMapping(value="/empleado/home")
     public String home(Model m){
         return "empleado";
     }

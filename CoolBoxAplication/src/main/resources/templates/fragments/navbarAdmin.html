@@ -1,62 +1,61 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
-  <link 
-    rel="stylesheet" 
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
-    crossorigin="anonymous" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-  <script 
-    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
-    crossorigin="anonymous">
+  <link rel="icon" href="images/icon.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+        crossorigin="anonymous">
+  <link rel="stylesheet" th:href="@{/css/navbar.css}">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
+          integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" 
+          crossorigin="anonymous">
   </script>
-  <link rel="stylesheet" href="/css/navbar.css" />
+  <style>
+    .navbar-nav .nav-link:hover {
+      background-color: rgb(161, 116, 0);
+      border-radius: 5px;
+    }
+    .logo:hover{
+      transform: scale(1.1);
+    }
+  </style>
 </head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-customa">
-    <div class="container">
-      <a class="navbar-brand" th:href="@{/admin/home}">
-        <img src="/images/logo.png" alt="Logo" class="d-inline-block align-top logo-img">
-      </a>
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse justify-content-center" id="navbarSupportedContent">
+<body class="bg-body-secondary">
+  <nav class="navbar navbar-expand-lg bg-customa">
+    <div class="container d-flex justify-content-between">
+      <div style="flex-basis: 0;" class="d-flex flex-grow-1">
+        <a class="navbar-brand" th:href="@{/admin/home}">
+          <img src="/images/logo.png" alt="Logo" width="200" height="auto" class="logo d-inline-block align-text-top">
+        </a>
+      </div>
+      <div class="d-flex justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link font-weight-bold" th:href="@{/admin/home}">Home</a>
+            <a class="nav-link text-white active fs-5 fw-medium" th:href="@{/admin/home}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link font-weight-bold" th:href="@{/admin/productos}">Productos</a>
+            <a class="nav-link text-white active fs-5 fw-medium" th:href="@{/admin/productos}">Productos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link font-weight-bold" th:href="@{/admin/usuarios}">Usuarios</a>
+            <a class="nav-link text-white active fs-5 fw-medium" th:href="@{/admin/usuarios}">Usuarios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link font-weight-bold" th:href="@{/admin/roles}">Roles</a>
+            <a class="nav-link text-white active fs-5 fw-medium" th:href="@{/admin/marcas}">Marcas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link font-weight-bold" th:href="@{/admin/marcas}">Marcas</a>
+            <a class="nav-link text-white active fs-5 fw-medium" th:href="@{/admin/roles}">Roles</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link font-weight-bold" th:href="@{/admin/categorias}">Categorias</a>
+            <a class="nav-link text-white active fs-5 fw-medium" th:href="@{/admin/categorias}">Categorias</a>
           </li>
         </ul>
       </div>
-      <div class="text-end">
-        <a th:href="@{/}">
-          <button type="button" class="btn btn-light">
-            <strong>Cerrar Sesión</strong>
-          </button>
-        </a>
+      <div style="flex-basis: 0;" class="d-flex flex-grow-1 justify-content-end">
+        <a class="btn btn-light fw-bold" th:href="@{/}">Cerrar Sesion</a>
       </div>
     </div>
   </nav>

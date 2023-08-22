@@ -50,9 +50,9 @@ public class LoginController {
 				if ("ADMINISTRADOR".equals(nombreRol)) {
 					return new ModelAndView(new RedirectView("/admin/home"));
 				} else if ("ALMACEN".equals(nombreRol)) {
-					return new ModelAndView(new RedirectView("/home/almacen"));
+					return new ModelAndView(new RedirectView("/almacen/home"));
 				} else if ("EMPLEADO".equals(nombreRol)) {
-					return new ModelAndView(new RedirectView("/home/empleado"));
+					return new ModelAndView(new RedirectView("/empleado/home"));
 				} else {
 					ModelAndView modelAndView = new ModelAndView("mensaje-error");
 					modelAndView.addObject("titulo", "Login No Exitoso");

@@ -36,7 +36,7 @@ public class CategoriasController {
 	@PostMapping(value = "/admin/categorias/guardar")
 	public String guardarCategoria(@ModelAttribute("categoria") Categorias categoria, Model model) {
 		Categorias categoriaExistente = categoriaDao.obtenerCategoriaPorNombre(categoria.getNombreCategoria());
-		if (categoriaExistente != null) {
+		if (categoriaExistente != null && !categoriaExistente.getIdCategoria().equals(categoria.getIdCategoria())) {
 			String mensaje = "La categoria ya existe";
 			model.addAttribute("titulo", "Error");
 			model.addAttribute("mensaje", mensaje);

@@ -5,43 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${titulo}"></title>
-    <link 
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
+    <link rel="icon" href="/images/icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
         rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
         crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script 
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" 
         crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="/css/forms.css">
 </head>
-<body class="bg-light">
+<body class="bg-body-secondary">
     <section th:replace="~{./fragments/navbarAdmin}"></section>
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="rounded-4 shadow p-4 border border-2"
                     th:classappend="${modo == 'registro' ? 'border-primary' : 'border-success'}">
-                    <h2 style="text-decoration: underline; font-size: 37px;"
-                        th:class="${modo == 'registro' ? 'font-weight-bold font-italic text-primary text-center mb-4' : 'font-weight-bold font-italic text-success text-center mb-4'}"
+                    <h2 th:class="${modo == 'registro' ? 'fw-bold fst-italic text-primary text-center mb-4 text-decoration-underline fs-2' : 
+                                'fw-bold fst-italic text-success text-center mb-4 text-decoration-underline fs-2'}"
                         th:text="${titulo}"></h2>
                     <form th:action="@{/admin/marcas/guardar}" method="post" class="form container" th:object="${marca}">
                         <input type="hidden" th:field="*{idMarca}" />
                         <div class="mb-3">
-                            <label for="nombreMarca" class="form-label font-weight-bold">Nombre de la Marca</label>
-                            <input type="text" class="form-control" id="nombreMarca" th:field="*{nombreMarca}"
+                            <label for="nombreMarca" class="fw-bold form-label font-weight-bold">Nombre de la Marca</label>
+                            <input type="text" class="text-uppercase fw-medium form-control" id="nombreMarca" th:field="*{nombreMarca}"
                                 required autofocus/>
                         </div>
                         <br>
                         <div class="d-grid gap-2">
-                            <button style="font-size: 17px;" type="submit"
-                                th:class="${modo == 'registro' ? 'font-weight-bold btn btn-primary' : 'font-weight-bold btn btn-success'}"
+                            <button type="submit" th:class="${modo == 'registro' ? 'fw-bold btn btn-primary fs-5' : 'fw-bold btn btn-success fs-5'}"
                                 th:text="${boton}"></button>
-                            <button style="font-size: 17px;" class="btn btn-secondary font-weight-bold" type="reset">Limpiar</button>
-                            <a style="font-size: 17px;" th:href="@{/admin/marcas}" class="btn btn-outline-secondary font-weight-bold">Cancelar</a>
+                            <a th:href="@{/admin/marcas}" class="btn btn-outline-secondary fw-bold fs-5">Cancelar</a>
                         </div>
                     </form>
                 </div>

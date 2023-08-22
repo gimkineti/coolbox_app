@@ -5,53 +5,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${titulo}"></title>
-    <link 
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
+    <link rel="icon" href="/images/icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
         rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
         crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script 
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" 
         crossorigin="anonymous">
     </script>
-    <link rel="stylesheet" href="/css/forms.css">
 </head>
-<body class="bg-light">
+<body class="bg-body-secondary">
     <section th:replace="~{./fragments/navbarAlmacen}"></section>
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="rounded-4 shadow p-4 border border-2"
                     th:classappend="${modo == 'registro' ? 'border-primary' : 'border-success'}">
-                    <h2 style="text-decoration: underline; font-size: 37px;"
-                        th:class="${modo == 'registro' ? 'font-weight-bold font-italic text-primary text-center mb-4' : 'font-weight-bold font-italic text-success text-center mb-4'}"
+                    <h2 th:class="${modo == 'registro' ? 'fw-bold fst-italic text-primary text-center mb-4 text-decoration-underline fs-2' : 
+                                'fw-bold fst-italic text-success text-center mb-4 text-decoration-underline fs-2'}"
                         th:text="${titulo}"></h2>
                     <form th:action="@{/almacen/productos/guardar}" method="post" class="form container"
                         th:object="${producto}">
                         <input type="hidden" th:field="*{idProducto}" />
                         <div class="mb-3">
-                            <label for="descripcionProducto" class="form-label font-weight-bold">Descripción del Producto</label>
-                            <input type="text" class="form-control" id="descripcionProducto"
+                            <label for="descripcionProducto" class="form-label fw-bold">Descripción del Producto</label>
+                            <input type="text" class="text-uppercase fw-medium form-control" id="descripcionProducto"
                                 th:field="*{descripcionProducto}" required autofocus>
                         </div>
                         <div class="mb-3">
-                            <label for="stockProducto" class="form-label font-weight-bold">Stock del Producto</label>
-                            <input type="number" class="form-control" id="stockProducto" th:field="*{stockProducto}"
+                            <label for="stockProducto" class="fw-bold form-label">Stock del Producto</label>
+                            <input type="number" class="text-uppercase fw-medium form-control" id="stockProducto" th:field="*{stockProducto}"
                                 required>
                         </div>
                         <div class="mb-3">
-                            <label for="marcaProducto" class="form-label font-weight-bold">Marca del Producto</label>
-                            <select class="form-select" id="marcaProducto" name="marcaProducto.idMarca" required>
+                            <label for="marcaProducto" class="fw-bold form-label">Marca del Producto</label>
+                            <select class="fw-medium form-select" id="marcaProducto" name="marcaProducto.idMarca" required>
                                 <option th:each="marca : ${marcas}" th:value="${marca.idMarca}"
                                     th:text="${marca.nombreMarca}"
                                     th:selected="${marca.idMarca == producto.marcaProducto?.idMarca}">Marca</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="categoriaProducto" class="form-label font-weight-bold">Categoria del Producto</label>
-                            <select class="form-select" id="categoriaProducto" name="categoriaProducto.idCategoria"
+                            <label for="categoriaProducto" class="fw-bold form-label">Categoria del Producto</label>
+                            <select class="fw-medium form-select" id="categoriaProducto" name="categoriaProducto.idCategoria"
                                 required>
                                 <option th:each="categoria : ${categorias}" th:value="${categoria.idCategoria}"
                                     th:text="${categoria.nombreCategoria}"
@@ -60,21 +57,21 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="precioVenta" class="form-label font-weight-bold">Precio de Venta</label>
-                            <input type="number" step="0.01" class="form-control" id="precioVenta"
+                            <label for="precioVenta" class="fw-bold form-label">Precio de Venta</label>
+                            <input type="number" step="0.01" class="text-uppercase fw-medium form-control" id="precioVenta"
                                 th:field="*{precioVenta}" required>
                         </div>
                         <div class="mb-3">
-                            <label for="rolProducto" class="form-label font-weight-bold">Rol del Usuario</label>
-                            <select class="form-select" id="rolProducto" name="rolProducto.idRol" required>
+                            <label for="rolProducto" class="fw-bold form-label">Rol del Usuario</label>
+                            <select class="fw-medium form-select" id="rolProducto" name="rolProducto.idRol" required>
                                 <option th:each="rol : ${roles}" th:if="${rol.nombreRol == 'ALMACEN'}"
                                     th:value="${rol.idRol}" th:text="${rol.nombreRol}"
                                     th:selected="${rol.idRol == producto.rolProducto?.idRol}">Rol</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="fechaProducto" class="form-label font-weight-bold">Fecha de Ingreso</label>
-                            <input type="date" class="form-control" id="fechaProducto" name="fechaProducto"
+                            <label for="fechaProducto" class="fw-bold form-label">Fecha de Ingreso</label>
+                            <input type="date" class="text-uppercase fw-medium form-control" id="fechaProducto" name="fechaProducto"
                                 th:value="${producto.fechaProducto != null ? #dates.format(producto.fechaProducto, 'yyyy-MM-dd') : ''}"
                                 required>
                             <div th:if="${#fields.hasErrors('fechaProducto')}" class="invalid-feedback">
@@ -83,11 +80,9 @@
                         </div>
                         <br>
                         <div class="d-grid gap-2">
-                            <button style="font-size: 17px;" type="submit"
-                                th:class="${modo == 'registro' ? 'font-weight-bold btn btn-primary' : 'font-weight-bold btn btn-success'}"
+                            <button type="submit" th:class="${modo == 'registro' ? 'fw-bold btn btn-primary fs-5' : 'fw-bold btn btn-success fs-5'}"
                                 th:text="${boton}"></button>
-                            <button style="font-size: 17px;" class="btn btn-secondary font-weight-bold" type="reset">Limpiar</button>
-                            <a style="font-size: 17px;" th:href="@{/almacen/productos}" class="btn btn-outline-secondary font-weight-bold">Cancelar</a>
+                            <a th:href="@{/almacen/productos}" class="fw-bold fs-5 btn btn-outline-secondary">Cancelar</a>
                         </div>
                     </form>
                 </div>

@@ -35,22 +35,24 @@ public class RolesController {
 
     @PostMapping("/admin/roles/guardar")
     public String guardarRol(@ModelAttribute("rol") Roles rol, Model model) {
-    	Roles rolExistente = rolesDao.obtenerRolPorNombre(rol.getNombreRol());
-    	if (rolExistente != null) {
-    		String mensaje = "El rol ya existe";
+        Roles rolExistente = rolesDao.obtenerRolPorNombre(rol.getNombreRol());
+
+        // Verificar si el rol existente tiene el mismo ID que el rol que se está actualizando
+        if (rolExistente != null && !rolExistente.getIdRol().equals(rol.getIdRol())) {
+            String mensaje = "El rol ya existe";
             model.addAttribute("titulo", "Error");
             model.addAttribute("mensaje", mensaje);
 
             if (rol.getIdRol() != null) {
-                model.addAttribute("direccion", "/admin/roles/" + rol.getIdRol() + "/editar");
+                model.addAttribute("direccion", "/admin/roles/" + rol.getIdRol() + "/editar"); // Si es una edición
             } else {
                 model.addAttribute("direccion", "/admin/roles/nuevo");
             }
             return "mensaje-error";
-    	} else {
-    		rolesDao.guardarRol(rol);
-    		return "redirect:/admin/roles";
-    	}
+        } else {
+            rolesDao.guardarRol(rol);
+            return "redirect:/admin/roles"; // Redirigir a la lista de roles
+        }
     }
 
     @GetMapping("/admin/roles/{idRol}/editar")

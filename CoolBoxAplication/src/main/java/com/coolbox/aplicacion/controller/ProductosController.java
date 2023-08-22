@@ -97,31 +97,35 @@ public class ProductosController {
             Marcas marca = marcasDao.obtenerMarca(producto.getMarcaProducto().getIdMarca());
             Categorias categoria = categoriasDao.obtenerCategoria(producto.getCategoriaProducto().getIdCategoria());
             Roles rol = rolesDao.obtenerRol(producto.getRolProducto().getIdRol());
-            if (producto.getIdProducto() == null) {
-                Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
 
+            Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
+
+            if (producto.getIdProducto() == null) { // Nuevo producto
                 if (descripcionExistente != null) {
-                    String mensaje = "La descripción ya existe";
+                    String mensaje = "El producto ya existe";
                     model.addAttribute("titulo", "Error");
                     model.addAttribute("mensaje", mensaje);
                     model.addAttribute("direccion", "/admin/productos/nuevo");
                     return "mensaje-error";
                 }
+
+                // Lógica para guardar el nuevo producto
                 producto.setCategoriaProducto(categoria);
                 producto.setMarcaProducto(marca);
                 producto.setRolProducto(rol);
                 java.sql.Date fecha = java.sql.Date.valueOf(fechaProducto);
                 producto.setFechaProducto(fecha);
                 productosDao.guardarProducto(producto);
-            } else {
-                Productos descripcionExistente = productosDao.obtenerProductoPorDescripcion(producto.getDescripcionProducto());
-                if (descripcionExistente != null) {
-                    String mensaje = "La descripción ya existe";
+            } else { // Producto existente
+                if (descripcionExistente != null && !descripcionExistente.getIdProducto().equals(producto.getIdProducto())) {
+                    String mensaje = "El producto ya existe";
                     model.addAttribute("titulo", "Error");
                     model.addAttribute("mensaje", mensaje);
                     model.addAttribute("direccion", "/admin/productos/" + producto.getIdProducto() + "/editar");
                     return "mensaje-error";
                 }
+
+                // Lógica para actualizar el producto
                 producto.setCategoriaProducto(categoria);
                 producto.setMarcaProducto(marca);
                 producto.setRolProducto(rol);
@@ -129,6 +133,7 @@ public class ProductosController {
                 producto.setFechaProducto(fecha);
                 productosDao.guardarProducto(producto);
             }
+
             return "redirect:/admin/productos";
         } catch (Exception e) {
             String mensaje = "Error al guardar el producto: " + e.getMessage();

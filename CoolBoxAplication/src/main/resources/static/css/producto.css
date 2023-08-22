@@ -11,12 +11,12 @@ th, td {
 }
 
 th {
-    background-color: #00BCD4;
+    background-color: #00b5c9;
     color: white;
 }
 
 tr:nth-child(odd) {
-    background-color: #E0F7FA;
+    background-color: #b8dee2;
 }
 .btn-export {
     display: inline-block;
