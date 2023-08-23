@@ -29,7 +29,8 @@
                         <input type="hidden" th:field="*{idUsuario}" />
                         <div class="mb-3">
                             <label for="rolUsuario" class="fw-bold form-label">Rol del Usuario</label>
-                            <select class="fw-medium form-select" id="rolUsuario" name="rolUsuario.idRol" required>
+                            <select class="fw-medium form-select" id="rolUsuario" name="rolUsuario.idRol" required autofocus>
+                                <option value="" disabled selected>Seleccione un rol...</option>
                                 <option th:each="rol : ${roles}" th:value="${rol.idRol}" th:text="${rol.nombreRol}"
                                     th:selected="${rol.idRol == usuario.rolUsuario?.idRol}">Rol</option>
                             </select>
@@ -37,7 +38,7 @@
                         <div class="mb-3">
                             <label for="nombreUsuario" class="fw-bold form-label">Nombre del Usuario</label>
                             <input type="text" class="text-uppercase fw-medium form-control" id="nombreUsuario" th:field="*{nombreUsuario}"
-                                required autofocus>
+                                required>
                         </div>
                         <div class="mb-3">
                             <label for="passwordUsuario" class="fw-bold form-label">Contraseña del Usuario</label>
@@ -54,7 +55,7 @@
                             <button type="submit"
                                 th:class="${modo == 'registro' ? 'fs-5 fw-bold btn btn-primary' : 'fs-5 fw-bold btn btn-success'}"
                                 th:text="${boton}"></button>
-                            <a th:href="@{/admin/usuarios}" class="fs-5 btn btn-outline-secondary fw-bold">Cancelar</a>
+                            <a th:href="@{/admin/usuarios}" class="fs-5 btn btn-secondary fw-bold">Cancelar</a>
                         </div>
                     </form>
                 </div>

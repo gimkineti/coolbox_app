@@ -17,7 +17,7 @@
 </head>
 <body class="bg-body-secondary">
     <section th:replace="~{./fragments/navbarAlmacen}"></section>
-    <div class="container py-5">
+    <div class="container py-4">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="rounded-4 shadow p-4 border border-2"
@@ -41,6 +41,7 @@
                         <div class="mb-3">
                             <label for="marcaProducto" class="fw-bold form-label">Marca del Producto</label>
                             <select class="fw-medium form-select" id="marcaProducto" name="marcaProducto.idMarca" required>
+                                <option value="" disabled selected>Seleccione una marca...</option>
                                 <option th:each="marca : ${marcas}" th:value="${marca.idMarca}"
                                     th:text="${marca.nombreMarca}"
                                     th:selected="${marca.idMarca == producto.marcaProducto?.idMarca}">Marca</option>
@@ -50,6 +51,7 @@
                             <label for="categoriaProducto" class="fw-bold form-label">Categoria del Producto</label>
                             <select class="fw-medium form-select" id="categoriaProducto" name="categoriaProducto.idCategoria"
                                 required>
+                                <option value="" disabled selected>Seleccione un categoría...</option>
                                 <option th:each="categoria : ${categorias}" th:value="${categoria.idCategoria}"
                                     th:text="${categoria.nombreCategoria}"
                                     th:selected="${categoria.idCategoria == producto.categoriaProducto?.idCategoria}">
@@ -64,6 +66,7 @@
                         <div class="mb-3">
                             <label for="rolProducto" class="fw-bold form-label">Rol del Usuario</label>
                             <select class="fw-medium form-select" id="rolProducto" name="rolProducto.idRol" required>
+                                <option value="" disabled selected>Seleccione un rol...</option>
                                 <option th:each="rol : ${roles}" th:if="${rol.nombreRol == 'ALMACEN'}"
                                     th:value="${rol.idRol}" th:text="${rol.nombreRol}"
                                     th:selected="${rol.idRol == producto.rolProducto?.idRol}">Rol</option>
@@ -78,7 +81,6 @@
                                 <span th:errors="*{fechaProducto}"></span>
                             </div>
                         </div>
-                        <br>
                         <div class="d-grid gap-2">
                             <button type="submit" th:class="${modo == 'registro' ? 'fw-bold btn btn-primary fs-5' : 'fw-bold btn btn-success fs-5'}"
                                 th:text="${boton}"></button>
