@@ -30,8 +30,8 @@ public class LoginController {
 									@RequestParam(name="passwordUsuario") String passwordUsuario) {
 		if (nombreUsuario.isEmpty() || passwordUsuario.isEmpty()) {
 			ModelAndView modelAndView = new ModelAndView("mensaje-error");
-			modelAndView.addObject("titulo", "Login No Exitoso");
-			modelAndView.addObject("mensaje", "Debes ingresar un nombre de usuario y una contraseña válida");
+			modelAndView.addObject("titulo", "Inicio De Sesión Fallido");
+			modelAndView.addObject("mensaje", "Debes Ingresar In Nombre De Usuario Y Una Contraseña Válida");
 			modelAndView.addObject("direccion", "/");
 			return modelAndView;
 		}
@@ -40,7 +40,7 @@ public class LoginController {
 			Usuarios usuario = usuarioDao.buscarUsuario(nombreUsuario, passwordUsuario);
 			if (usuario == null) {
 				ModelAndView modelAndView = new ModelAndView("mensaje-error");
-				modelAndView.addObject("titulo", "Login No Exitoso");
+				modelAndView.addObject("titulo", "Inicio De Sesión Fallido");
 				modelAndView.addObject("mensaje", "El Usuario Y La Contraseña No Coinciden");
 				modelAndView.addObject("direccion", "/");
 				return modelAndView;
@@ -55,15 +55,15 @@ public class LoginController {
 					return new ModelAndView(new RedirectView("/empleado/home"));
 				} else {
 					ModelAndView modelAndView = new ModelAndView("mensaje-error");
-					modelAndView.addObject("titulo", "Login No Exitoso");
-					modelAndView.addObject("mensaje", "El Rol del Usuario no tiene una redirección definida");
+					modelAndView.addObject("titulo", "Inicio De Sesión Fallido");
+					modelAndView.addObject("mensaje", "Este Usuario No Tiene Acceso");
 					modelAndView.addObject("direccion", "/");
 					return modelAndView;
 				}
 			}
 		} catch (NoResultException e) {
 			ModelAndView modelAndView = new ModelAndView("mensaje-error");
-			modelAndView.addObject("titulo", "Login No Exitoso");
+			modelAndView.addObject("titulo", "Inicio De Sesión Fallido");
 			modelAndView.addObject("mensaje", "El Usuario Y La Contraseña No Coinciden");
 			modelAndView.addObject("direccion", "/");
 			return modelAndView;
