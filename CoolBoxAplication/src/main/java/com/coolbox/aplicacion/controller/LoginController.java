@@ -31,7 +31,7 @@ public class LoginController {
 		if (nombreUsuario.isEmpty() || passwordUsuario.isEmpty()) {
 			ModelAndView modelAndView = new ModelAndView("mensaje-error");
 			modelAndView.addObject("titulo", "Inicio De Sesión Fallido");
-			modelAndView.addObject("mensaje", "Debes Ingresar In Nombre De Usuario Y Una Contraseña Válida");
+			modelAndView.addObject("mensaje", "Debes Ingresar Un Nombre De Usuario Y Una Contraseña Válida");
 			modelAndView.addObject("direccion", "/");
 			return modelAndView;
 		}
