@@ -22,7 +22,14 @@
         <div class="d-flex justify-content-center">
             <h1 class="text-decoration-underline mt-4 mb-4 fw-bold fst-italic" th:text="${titulo}"></h1>
         </div>
-        <a class="btn btn-primary mb-3 fw-bold" th:href="@{/admin/productos/nuevo}">Agregar Nuevo Producto</a>
+        <div class="mb-1 d-flex justify-content-between">
+            <div>
+                <a class="btn btn-warning mb-3 mx- fw-bold" th:href="@{/admin/productos/descripcion}">Buscar por Nombre</a>
+                <a class="btn btn-warning mb-3 mx-2 fw-bold" th:href="@{/admin/productos/marca}">Buscar por Marca</a>
+                <a class="btn btn-warning mb-3 fw-bold" th:href="@{/admin/productos/categoria}">Buscar por Categoría</a>
+            </div>
+            <a class="btn btn-primary mb-3 fw-bold" th:href="@{/admin/productos/nuevo}">Agregar Nuevo Producto</a>
+        </div>
         <table>
             <thead>
                 <tr class="text-center">

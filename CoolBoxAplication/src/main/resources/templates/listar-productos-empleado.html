@@ -25,7 +25,6 @@
         <table>
             <thead>
                 <tr class="text-center">
-                    <th class="fw-bold align-middle">ID del Producto</th>
                     <th class="fw-bold align-middle">Descripción del Producto</th>
                     <th class="fw-bold align-middle">Stock del Producto</th>
                     <th class="fw-bold align-middle">Marca del Producto</th>
@@ -35,7 +34,6 @@
             </thead>
             <tbody>
                 <tr th:each="producto : ${productos}" class="text-center">
-                    <td class="fw-medium align-middle" th:text="${producto.idProducto}"></td>
                     <td class="fw-medium align-middle" th:text="${producto.descripcionProducto}"></td>
                     <td class="fw-medium align-middle" th:text="${producto.stockProducto}"></td>
                     <td class="fw-medium align-middle" th:text="${producto.nombreMarca}"></td>

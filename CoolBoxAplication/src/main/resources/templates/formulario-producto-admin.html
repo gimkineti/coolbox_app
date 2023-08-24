@@ -23,7 +23,7 @@
                 <div class="rounded-4 shadow p-4 border border-2"
                     th:classappend="${modo == 'registro' ? 'border-primary' : 'border-success'}">
                     <h2 th:class="${modo == 'registro' ? 'fw-bold fst-italic text-primary text-center mb-4 text-decoration-underline fs-2' : 
-                                'font-weight-bold font-italic text-success text-center mb-4 text-decoration-underline fs-2'}"
+                                'font-weight-bold fst-italic text-success text-center mb-4 text-decoration-underline fs-2'}"
                         th:text="${titulo}"></h2>
                     <form th:action="@{/admin/productos/guardar}" method="post" class="form container"
                         th:object="${producto}">

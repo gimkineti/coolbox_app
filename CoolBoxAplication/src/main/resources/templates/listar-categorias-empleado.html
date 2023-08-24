@@ -24,13 +24,11 @@
         <table>
             <thead>
                 <tr class="text-center">
-                    <th class="fw-bold align-middle">ID de la Categoria</th>
                     <th class="fw-bold align-middle">Nombre de la Categoria</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="categoria : ${categorias}" class="text-center">
-                    <td class="fw-medium align-middle" th:text="${categoria.idCategoria}"></td>
                     <td class="fw-medium align-middle" th:text="${categoria.nombreCategoria}"></td>
                </tr>
             </tbody>

@@ -24,13 +24,11 @@
         <table>
             <thead>
                 <tr class="text-center">
-                    <th class="fw-bold align-middle">ID de la Marca</th>
                     <th class="fw-bold align-middle">Nombre de la Marca</th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="marca : ${marcas}" class="text-center">
-                    <td class="fw-medium align-middle" th:text="${marca.idMarca}"></td>
                     <td class="fw-medium align-middle" th:text="${marca.nombreMarca}"></td>
                 </tr>
             </tbody>

@@ -20,16 +20,9 @@
     <section th:replace="~{./fragments/navbarAlmacen}"></section>
     <div class="container">
         <div class="d-flex justify-content-center">
-            <h1 class="text-decoration-underline mt-4 mb-4 fw-bold fst-italic" th:text="${titulo}"></h1>
+            <h1 class="text-decoration-underline mt-4 mb-4 fw-bold fs-2 fst-italic" th:text="${titulo}"></h1>
         </div>
-        <div class="mb-1 d-flex justify-content-between">
-            <div>
-                <a class="btn btn-warning mb-3 mx- fw-bold" th:href="@{/almacen/productos/descripcion}">Buscar por Nombre</a>
-                <a class="btn btn-warning mb-3 mx-2 fw-bold" th:href="@{/almacen/productos/marca}">Buscar por Marca</a>
-                <a class="btn btn-warning mb-3 fw-bold" th:href="@{/almacen/productos/categoria}">Buscar por Categoría</a>
-            </div>
-            <a class="btn btn-primary mb-3 fw-bold" th:href="@{/almacen/productos/nuevo}">Agregar Nuevo Producto</a>
-        </div>
+        <a th:href="@{/almacen/productos/descripcion}" class="mb-3 fw-bold fs-5 btn btn-outline-primary">Volver A Buscar Productos</a>
         <table>
             <thead>
                 <tr class="text-center">
@@ -48,15 +41,14 @@
                     <td class="fw-medium align-middle" th:text="${producto.idProducto}"></td>
                     <td class="fw-medium align-middle" th:text="${producto.descripcionProducto}"></td>
                     <td class="fw-medium align-middle" th:text="${producto.stockProducto}"></td>
-                    <td class="fw-medium align-middle" th:text="${producto.nombreMarca}"></td>
-                    <td class="fw-medium align-middle" th:text="${producto.nombreCategoria}"></td>
+                    <td class="fw-medium align-middle" th:text="${producto.marcaProducto.nombreMarca}"></td>
+                    <td class="fw-medium align-middle" th:text="${producto.categoriaProducto.nombreCategoria}"></td>
                     <td class="fw-medium align-middle" th:text="${producto.precioVenta}"></td>
                     <td class="fw-medium align-middle" th:text="${producto.fechaProducto}"></td>
                     <td class="d-flex justify-content-center align-items-center">
                         <a class="btn btn-success mx-2 my-1 fw-bold" 
-                        th:href="@{/almacen/productos/{idProducto}/editar(idProducto=${producto.idProducto})}"
-                        th:text="Editar"></a>
-                    </td>                    
+                            th:href="@{/almacen/productos/{idProducto}/editar(idProducto=${producto.idProducto})}" th:text="Editar"></a>
+                    </td>
                 </tr>
             </tbody>
         </table>

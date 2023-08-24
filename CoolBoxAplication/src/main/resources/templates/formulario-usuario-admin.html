@@ -43,7 +43,7 @@
                         <div class="mb-3">
                             <label for="passwordUsuario" class="fw-bold form-label">Contraseña del Usuario</label>
                             <input type="password" class="text-uppercase fw-medium form-control" id="passwordUsuario"
-                                th:field="*{passwordUsuario}" required>
+                                th:field="*{passwordUsuario}" th:required="${modo == 'registro'}">
                         </div>
                         <div class="mb-3">
                             <label for="emailUsuario" class="fw-bold form-label">Email del Usuario</label>
